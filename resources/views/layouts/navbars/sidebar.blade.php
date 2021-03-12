@@ -73,7 +73,7 @@
             <h6 class="navbar-heading text-muted">เมนูระบบ</h6>
             <!-- Navigation -->
             <ul class="navbar-nav">
-                <li class="nav-item  {{ (request()->is('drugOrder')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }}">
                     <a class="nav-link" href="/drugOrder">
                         <i class="fas fa-notes-medical text-danger"></i> ระบบออเดอร์ผู้ป่วยใน
                     </a>
@@ -86,7 +86,7 @@
                             class="nav-link-text">{{ __('ระบบงานเวชระเบียน') }}
                         </span>
                     </a>
-                    <div class="collapse hidden" id="navbar-office">
+                    <div class="collapse {{ (request()->is('tracking')) ? 'show' : '' }}" id="navbar-office">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
@@ -94,7 +94,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/tracking">
+                                <a class="nav-link {{ (request()->is('tracking')) ? 'active' : '' }}" href="/tracking">
                                     {{ __('ติดตามเวชระเบียนผู้ป่วยใน') }}
                                 </a>
                             </li>

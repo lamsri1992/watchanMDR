@@ -54,7 +54,7 @@
                     </article>
                     <div class="track">
                         <div class="step active"> 
-                            <span class="icon" data-toggle="tooltip" data-placement="top" title="งานผู้ป่วยในดำเนินการ Discharge"><i class="fa fa-external-link-alt"></i></span> 
+                            <span class="icon" data-toggle="tooltip" data-placement="top" title="งานผู้ป่วยในดำเนินการ Discharge"><i class="fa fa-clipboard-check"></i></span> 
                             <span class="text"><i class="fa fa-check text-success"></i> IPD Discharge</span>
                         </div>
                         <div class="step"> 

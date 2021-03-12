@@ -53,7 +53,9 @@
             </div>
         </div>
     </div>
+    @include('layouts.footers.nav')
 </div>
+
 @endsection
 
 @push('js')

@@ -20,6 +20,10 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                        <i class="fa fa-unlock-alt"></i>
+                        <span>{{ __('เปลี่ยนรหัสผ่าน') }}</span>
+                    </a>
                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         <i class="ni ni-button-power"></i>

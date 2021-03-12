@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $num = DB::connection('pgsql')
+                ->select(DB::raw("SELECT COUNT(visit_vn) AS admit_num FROM t_visit WHERE f_visit_type_id = '1' AND f_visit_status_id ='1'"));
+        return view('dashboard', ['num'=>$num]);
     }
 }

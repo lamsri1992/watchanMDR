@@ -2,8 +2,8 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('สวัสดี') . ' '. auth()->user()->name,
-        'description' => __(''),
+        'title' => __('สวัสดี') . ' '. Auth::user()->name,
+        'description' => __('สิทธิ์การใช้งาน : '). ' '. Auth::user()->permission,
         'class' => 'col-lg-12'
     ])   
 

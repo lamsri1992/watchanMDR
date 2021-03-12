@@ -15,11 +15,14 @@
                                 src="{{ asset('argon') }}/img/theme/avatar.png">
                         </span>
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
+                            <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->name }}</span>
                         </div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                    <div class=" dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">{{ Auth::user()->permission }}</h6>
+                    </div>
                     <a href="{{ route('profile.edit') }}" class="dropdown-item">
                         <i class="fa fa-unlock-alt"></i>
                         <span>{{ __('เปลี่ยนรหัสผ่าน') }}</span>

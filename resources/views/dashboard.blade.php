@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-body table-responsive">
                     <!-- Top IPD Type -->
-                    <table id="ipdtype" class="table table-striped table-borderless" style="width:100%">
+                    <table id="ipdtype" class="table table-striped table-borderless" style="width:100%;">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">คลินิก</th>
@@ -71,6 +71,7 @@ $(document).ready(function () {
             ordering: false,
             info: false,
             searching: false,
+            scrollY: '46.3vh',
         ajax: {
             url: "/api/ipdadmit",
             dataSrc: ""

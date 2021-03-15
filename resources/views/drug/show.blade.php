@@ -118,6 +118,7 @@
                                 </form>
                             </div>
                             <div class="container-fluid">
+                                <br>
                                 @php
                                     $path = "/MDR/".$list->drug_vn."/Order/";
                                     $handle = opendir('MDR/'.$list->drug_vn.'/Order');

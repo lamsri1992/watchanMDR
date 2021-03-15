@@ -27,7 +27,11 @@ class OrderListController extends Controller
                 ->leftJoin('track_status', 'track_status.t_stat_id', '=', 'tracking_list.list_status')
                 ->where('tracking_list.track_id', $parm_id)
                 ->get();
-        return view('tracking.show', ['order'=>$order , 'list'=>$list]);
+        $count =  DB::connection('mysql')->table('tracking_list')
+                ->where('tracking_list.track_id', $parm_id)
+                ->where('tracking_list.list_status', 1)
+                ->count();
+        return view('tracking.show', ['order'=>$order , 'list'=>$list, 'count'=>$count]);
     }
 
     function createOrder(Request $request)
@@ -57,5 +61,51 @@ class OrderListController extends Controller
             $Token = "XsIxstDVzAVfiIGwm9awArboU9B2nBTZQXLJfA0YDWn";
             $message = "มีรายการตามชาร์ทใหม่ ".$case." รายการ\n".$text;
         line_notify($Token, $message);
+    }
+
+    function updateTrack(Request $request)
+    {
+        $id = $request->get('formID');
+        $point = $request->get('formData') + 1;
+        $update = date("Y-m-d H:i:s");
+        DB::connection('mysql')->table('tracking_order')->where('track_id', $id)->update(
+            [
+                'track_point' => $point,
+                'update_at' => $update,
+            ]
+        );
+
+        DB::connection('mysql')->table('tracking_list')->where('track_id', $id)->update(
+            [
+                'list_start' => $update,
+            ]
+        );
+    }
+
+    function finalTrack(Request $request)
+    {
+        $id = $request->get('formID');
+        $point = $request->get('formData') + 1;
+        $update = date("Y-m-d H:i:s");
+        DB::connection('mysql')->table('tracking_order')->where('track_id', $id)->update(
+            [
+                'track_point' => $point,
+                'update_at' => $update,
+                'track_status' => 2,
+            ]
+        );
+    }
+
+    function keepChart($id)
+    {
+        $parm_id = base64_decode($id);
+        $update = date("Y-m-d H:i:s");
+        DB::connection('mysql')->table('tracking_list')->where('list_id', $parm_id)->update(
+            [
+                'list_status' => 2,
+                'list_end' => $update,
+            ]
+        );
+        return back()->with("keep","เก็บชาร์ทแล้ว");
     }
 }

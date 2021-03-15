@@ -22,6 +22,9 @@ Route::group(['prefix' => 'tracking'], function () {
 	Route::get('/createOrderList', function () { return view('tracking.create'); });
 	Route::get('/{id}','OrderListController@show')->name('tracking.show');
     Route::post('/createOrder','OrderListController@createOrder')->name('tracking.createOrder');
+    Route::post('/updateTrack','OrderListController@updateTrack')->name('tracking.updateTrack');
+    Route::post('/finalTrack','OrderListController@finalTrack')->name('tracking.finalTrack');
+    Route::get('/keepChart/{id}','OrderListController@keepChart')->name('tracking.keepChart');
 });
 
 Route::group(['prefix' => 'drugOrder'], function () {

@@ -59,7 +59,7 @@
             { 'data': 'visit_vn', className: "text-center" },
             { 'data': 'visit_hn', className: "text-center" },
             { 'data': 'visit_patient_self_doctor' },
-            { 'data': 'doctor',
+            { 'data': 'employee_firstname',
                 render: function (data, type, row, meta) {
                 return row.employee_firstname + ' ' + row.employee_lastname
             }

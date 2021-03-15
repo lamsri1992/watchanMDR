@@ -38,6 +38,11 @@ Route::group(['prefix' => 'drugOrder'], function () {
 	Route::post('/fileDelete', 'DrugOrderController@delete')->name('drug.fileDelete');
 });
 
+Route::group(['prefix' => 'search'], function () {
+	// Route::get('/', function () { return view('search.result'); });
+	Route::post('/','MdrController@search');
+});
+
 Route::group(['prefix' => 'store'], function () {
 	Route::get('/', function () { return view('store.index'); });
 });

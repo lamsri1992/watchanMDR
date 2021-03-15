@@ -5,6 +5,16 @@
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
             href="{{ route('home') }}">{{ __('WATCHAN MDR :: ระบบบริหารจัดการเวชระเบียนผู้ป่วยใน โรงพยาบาลวัดจันทร์เฉลิมพระเกียรติ ๘๐ พรรษา') }}</a>
         <!-- User -->
+        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+            <div class="form-group mb-0">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="ค้นหาเวชระเบียน [ ค้นจาก HN, VN, ชื่อผู้ป่วย ]" type="text">
+                </div>
+            </div>
+        </form>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"

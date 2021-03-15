@@ -76,7 +76,7 @@
                 <div class="card-body">
                    <div class="container-fluid">
                        <h6><i class="fa fa-clipboard-list"></i> รายการเวชระเบียนผู้ป่วยใน</h6>
-                       <table class="table table-striped table-borderless table-sm">
+                       <table class="table table-striped table-borderless table-bordered table-sm">
                            <thead class="thead-dark">
                                <tr>
                                    <th class="text-center">เลข VN</th>

@@ -80,6 +80,11 @@ class OrderListController extends Controller
                 'list_start' => $update,
             ]
         );
+        $notify_id = str_pad($id, 4, '0', STR_PAD_LEFT);
+        // send line message
+        $Token = "XsIxstDVzAVfiIGwm9awArboU9B2nBTZQXLJfA0YDWn";
+        $message = "งานเภสัชกรรมดำเนินการเสร็จสิ้น\nรหัส WCC23736".$notify_id;
+     line_notify($Token, $message);
     }
 
     function finalTrack(Request $request)

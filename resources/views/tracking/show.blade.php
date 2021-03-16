@@ -142,7 +142,7 @@
                 </div>
                 <div class="card-body">
                     <div class="container-fluid text-center">
-                            @if($order->track_point == 1)
+                            @if($order->track_point == 1 &&  Auth::user()->permission_id == 3)
                             <button id="phar_complete" class="btn btn-success" data-id="{{ $order->track_id }}"
                                 data-point="{{ $order->track_point }}">
                                 <i class="fas fa-check-circle"></i> เภสัชกรรมดำเนินการ

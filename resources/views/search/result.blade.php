@@ -40,7 +40,11 @@
                             <tbody>
                                 @foreach ($result as $results)
                                 <tr>
-                                    <th>WCC23736{{ str_pad($results->track_id, 4, '0', STR_PAD_LEFT) }}</th>
+                                    <th>
+                                        <a href="{{ route('tracking.show',base64_encode($results->track_id)) }}">
+                                            WCC23736{{ str_pad($results->track_id, 4, '0', STR_PAD_LEFT) }}
+                                        </a>
+                                    </th>
                                     <td>{{ $results->list_vn }}</td>
                                     <td>{{ $results->list_hn }}</td>
                                     <td>{{ $results->point_name }}</td>

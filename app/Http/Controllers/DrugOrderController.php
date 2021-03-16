@@ -64,7 +64,7 @@ class DrugOrderController extends Controller
         // PHAR
         $Token = "6UTdo1OJF6WRHLiTJxsN90vGz2eXewUHI7xZ3SSw1dR";
         $message = "มีรายการสั่งยาใหม่\nหมายเลข HN: ".$data->drug_hn."\nหมายเลข VN: ".$data->drug_vn."\nเตียง/ห้อง: ".$data->drug_bed."
-                    \nวันที่สร้าง: ".$data->create_at."\nhttp://172.20.55.10:5555/drugOrder/".base64_encode($data->drug_id)."";
+                    \nวันที่สร้าง: ".$data->create_at."\nhttp://172.20.55.10:8000/drugOrder/".base64_encode($data->drug_id)."";
         line_notify($Token, $message);
         
         return back()->with("success","อัพโหลดรายการ VN: ".$vn." เรียบร้อยแล้ว");

@@ -112,7 +112,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="username">Username</label>
-                            <input type="password" name="username" class="form-control" id="username" placeholder="กำหนดชื่อผู้ใช้งาน" required>
+                            <input type="text" name="username" class="form-control" id="username" placeholder="กำหนดชื่อผู้ใช้งาน" required>
                         </div>
                     </div>
                     <div class="form-row">

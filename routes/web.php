@@ -39,8 +39,12 @@ Route::group(['prefix' => 'drugOrder'], function () {
 });
 
 Route::group(['prefix' => 'search'], function () {
-	// Route::get('/', function () { return view('search.result'); });
 	Route::post('/','MdrController@search');
+});
+
+Route::group(['prefix' => 'users'], function () {
+	Route::get('/','AccountController@index')->name('users.index');
+	Route::post('/addUser','AccountController@addUser');
 });
 
 Route::group(['prefix' => 'store'], function () {

@@ -154,7 +154,7 @@
                                 <i class="fas fa-sign-out-alt"></i> ดำเนินการขั้นตอนกลุ่มการแพทย์
                             </button>
                             @endif
-                            @if(Auth::user()->permission_id == 1 || Auth::user()->permission_id == 2)
+                            @if(Auth::user()->permission_id == 1 && $order->track_point == 3)
                             @if ($order->track_status == 2)
                                 @php
                                     $show = 'disabled';

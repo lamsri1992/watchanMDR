@@ -73,7 +73,8 @@
             <h6 class="navbar-heading text-muted">เมนูระบบ</h6>
             <!-- Navigation -->
             <ul class="navbar-nav">
-                <li class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }}">
+                <li
+                    class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }}">
                     <a class="nav-link" href="/drugOrder">
                         <i class="fas fa-notes-medical text-danger"></i> ระบบออเดอร์ผู้ป่วยใน
                     </a>
@@ -86,7 +87,8 @@
                             class="nav-link-text">{{ __('ระบบงานเวชระเบียน') }}
                         </span>
                     </a>
-                    <div class="collapse {{ (request()->is('tracking')) ? 'show' : '' }}" id="navbar-office">
+                    <div class="collapse {{ (request()->is('tracking')) ? 'show' : '' }}"
+                        id="navbar-office">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
@@ -94,7 +96,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('tracking')) ? 'active' : '' }}" href="/tracking">
+                                <a class="nav-link {{ (request()->is('tracking')) ? 'active' : '' }}"
+                                    href="/tracking">
                                     {{ __('ติดตามเวชระเบียนผู้ป่วยใน') }}
                                 </a>
                             </li>
@@ -108,6 +111,15 @@
                 </li>
             </ul>
             <hr class="my-3">
+            <h6 class="navbar-heading text-muted">เมนูผู้ดูแลระบบ</h6>
+            <ul class="navbar-nav mb-md-3">
+                <li
+                    class="nav-item {{ (request()->is('users')) ? 'active' : '' }}">
+                    <a class="nav-link" href="/users">
+                        <i class="fas fa-users text-info"></i> ระบบจัดการผู้ใช้งาน
+                    </a>
+                </li>
+            </ul>
             <h6 class="navbar-heading text-muted">คู่มือการใช้งาน</h6>
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">

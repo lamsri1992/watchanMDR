@@ -110,6 +110,7 @@
                     </div>
                 </li>
             </ul>
+            @if(Auth::user()->permission_id == 1)
             <hr class="my-3">
             <h6 class="navbar-heading text-muted">เมนูผู้ดูแลระบบ</h6>
             <ul class="navbar-nav mb-md-3">
@@ -120,6 +121,7 @@
                     </a>
                 </li>
             </ul>
+            @endif
             <h6 class="navbar-heading text-muted">คู่มือการใช้งาน</h6>
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">

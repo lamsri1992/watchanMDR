@@ -110,7 +110,7 @@
                                     <th class="text-center"><i class="far fa-clock"></i> วันที่/เวลา Admit</th>
                                     <th class="text-center"><i class="far fa-clock"></i> วันที่ส่งชาร์ท</th>
                                     <th class="text-center">สถานะ</th>
-                                    @if ($order->track_point == 2 && $count >= 1)
+                                    @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
                                         <th class="text-center"><i class="fa fa-clipboard-check"></i></th>
                                     @endif
                                 </tr>
@@ -126,7 +126,7 @@
                                         <td class="text-center {{ $lists->t_stat_color }}">
                                             @php echo $lists->t_stat_text @endphp
                                         </td>
-                                        @if ($order->track_point == 2  && $count >= 1)
+                                        @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
                                         <td class="text-center">
                                             <a class="btn btn-success btn-sm" href="{{ route('tracking.keepChart',base64_encode($lists->list_id)) }}" 
                                                 class="btn btn-info btn-sm" onclick="return confirm('ยืนยันการเก็บชาร์ท VN: {{ $lists->list_vn }}')">
@@ -142,9 +142,14 @@
                 </div>
                 <div class="card-body">
                     <div class="container-fluid text-center">
-                            @if($order->track_point == 1 &&  Auth::user()->permission_id == 3)
+                            @if($order->track_point == 1 &&  Auth::user()->permission_id == 1 || Auth::user()->permission_id == 2)
+                            @if ($order->track_point == 2)
+                                @php $btn = 'disabled'; @endphp
+                            @else
+                                @php $btn = ''; @endphp
+                            @endif
                             <button id="phar_complete" class="btn btn-success" data-id="{{ $order->track_id }}"
-                                data-point="{{ $order->track_point }}">
+                                data-point="{{ $order->track_point }}" {{ $btn }}>
                                 <i class="fas fa-check-circle"></i> เภสัชกรรมดำเนินการ
                             </button>
                             @endif
@@ -156,13 +161,9 @@
                             @endif
                             @if(Auth::user()->permission_id == 1 && $order->track_point == 3)
                             @if ($order->track_status == 2)
-                                @php
-                                    $show = 'disabled';
-                                @endphp
+                                @php $show = 'disabled'; @endphp
                             @else 
-                                @php
-                                    $show = '';
-                                @endphp
+                                @php $show = ''; @endphp
                             @endif
                             <button id="final_complete" class="btn btn-success" data-id="{{ $order->track_id }}"
                                 data-point="{{ $order->track_point }}" {{ $show }}>

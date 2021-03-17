@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
-
+@if (Auth::check() == NULL)
+    @php header( "location: /login" ); exit(0); @endphp
+@endif
 <div class="header bg-gradient-primary pb-8 pt-5"></div>
 <div class="container-fluid mt--7">
     <div class="row">

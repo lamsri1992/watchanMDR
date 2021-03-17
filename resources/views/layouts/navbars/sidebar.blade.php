@@ -120,6 +120,12 @@
                         <i class="fas fa-users text-info"></i> ระบบจัดการผู้ใช้งาน
                     </a>
                 </li>
+                <li
+                class="nav-item {{ (request()->is('token')) ? 'active' : '' }}">
+                <a class="nav-link" href="/token">
+                    <i class="fab fa-line text-success"></i> ตั้งค่า Line Token
+                </a>
+            </li>
             </ul>
             @endif
             <h6 class="navbar-heading text-muted">คู่มือการใช้งาน</h6>

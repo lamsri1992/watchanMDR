@@ -112,16 +112,14 @@
     $('#btnSubmit').click( function () {
         var token = "{{ csrf_token() }}";
         var array = [];
+
         table.rows('.selected').every(function(rowIdx) {
             array.push(table.row(rowIdx).data())
         })
 
-        // console.log(token);
-        // console.log(array);
-
         var formData = array;
         Swal.fire({
-            title: 'สร้าง Tracking Order ?',
+            title: 'สร้าง Tracking Order List ?',
             text: 'โปรดตรวจสอบรายการ ก่อนสร้างรายการใหม่ทุกครั้ง',
             showCancelButton: true,
             confirmButtonText: `สร้างรายการ`,
@@ -135,7 +133,7 @@
                     success:function(data){
                         let timerInterval
                             Swal.fire({
-                            title: 'กำลังสร้าง Orders List',
+                            title: 'กำลังสร้าง Tracking Order List',
                             timer: 2000,
                             timerProgressBar: true,
                             didOpen: () => {

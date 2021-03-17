@@ -2,6 +2,7 @@
     <div class="col-xl-6">
         <div class="copyright text-center text-xl-left text-muted">
             &copy; {{ now()->year }} <a href="https://www.watchanhospital.com" class="font-weight-bold ml-1" target="_blank">WATCHAN HOSPITAL</a>
+            {{ public_path('MDR/164000000/Order') }}
         </div>
     </div>
     <div class="col-xl-6">

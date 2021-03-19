@@ -78,7 +78,7 @@
                 selector: 'td:nth-child(2)'
             },
             order: [
-                [0, 'asc']
+                [0, 'desc']
             ],
             oLanguage: {
                 oPaginate: {

@@ -27,13 +27,13 @@
                         <table id="visitList" class="display nowrap table" style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th class=""><i class="fa fa-plus-circle"></i>&nbsp;</th>
                                     <th class="">หมายเลข VN</th>
                                     <th class="">หมายเลข HN</th>
                                     <th class=""><i class="far fa-address-card"></i> ผู้ป่วย</th>
                                     <th class=""><i class="fa fa-bed"></i> เตียง/ห้อง</th>
                                     <th class=""><i class="fas fa-user-md"></i> แพทย์ผู้ตรวจ</th>
                                     <th class=""><i class="far fa-calendar-check"></i> วันที่ Admit</th>
-                                    <th class=""><i class="fa fa-plus-circle"></i>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -55,6 +55,9 @@
             dataSrc: ""
         },
         columns: [
+            { 'targets': -1, 'data': null, className: "text-center",
+                'defaultContent': '<button class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Orders</button>'
+            },
             { 'data': 'visit_vn', className: "text-center" },
             { 'data': 'visit_hn', className: "text-center" },
             { 'data': 'patient_firstname',
@@ -69,19 +72,17 @@
             }, className: "text-center"
             },
             { 'data': 'visit_begin_admit_date_time', className: "text-center" },
-            { 'targets': -1, 'data': null, className: "text-center",
-                'defaultContent': '<button class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Orders</button>'
-            }
         ],
-        order: [[0, 'desc']],
+        order: [[1, 'desc']],
         lengthMenu: [
             [10, 50, 100, -1],
             [10, 50, 100, "All"]
         ],
-        responsive: true,
-        rowReorder: {
-            selector: 'td:nth-child(2)'
-        },
+        scrollX: true,
+        // responsive: true,
+        // rowReorder: {
+        //     selector: 'td:nth-child(2)'
+        // },
         oLanguage: {
             oPaginate: {
                 sFirst: '<small>หน้าแรก</small>',

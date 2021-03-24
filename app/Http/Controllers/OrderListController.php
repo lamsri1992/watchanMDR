@@ -50,12 +50,13 @@ class OrderListController extends Controller
                 [
                     'list_vn' => $array['visit_vn'],
                     'list_hn' => $array['visit_hn'],
+                    'list_patient' => $array['patient_firstname']." ".$array['patient_lastname'],
                     'list_doctor' => $array['employee_firstname']." ".$array['employee_lastname'],
                     'list_discharge' => $array['visit_ipd_discharge_date_time'],
                     'track_id' => $OrderID
                 ]
             );
-            $text .= "หมายเลข HN: ".$array['visit_hn']."\nหมายเลข VN: ".$array['visit_vn']."\nวันที่ Discharge: ".$array['visit_ipd_discharge_date_time']."\n\n";
+            $text .= "ผู้ป่วย: ".$array['patient_firstname']." ".$array['patient_lastname']."\nหมายเลข HN: ".$array['visit_hn']."\nหมายเลข VN: ".$array['visit_vn']."\nวันที่ Discharge: ".$array['visit_ipd_discharge_date_time']."\n\n";
         }
         // send line message
             $Token = "XsIxstDVzAVfiIGwm9awArboU9B2nBTZQXLJfA0YDWn";

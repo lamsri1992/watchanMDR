@@ -14,8 +14,10 @@ class ListApiController extends Controller
                 ->table('t_visit')
                 ->select('t_visit.visit_hn','t_visit.visit_vn','t_visit.visit_patient_self_doctor'
                 ,'b_employee.employee_firstname','b_employee.employee_lastname','t_visit.visit_bed'
+                ,'t_visit.visit_begin_admit_date_time','t_patient.patient_firstname','t_patient.patient_lastname'
                 ,'t_visit.visit_ipd_discharge_date_time')
                 ->leftJoin('b_employee', 'b_employee.b_employee_id', '=', 't_visit.visit_patient_self_doctor')
+                ->leftJoin('t_patient', 't_patient.patient_hn', '=', 't_visit.visit_hn')
                 ->where('t_visit.f_visit_type_id', '=', 1)
                 ->where('t_visit.f_visit_status_id', '=', 1)
                 ->where('t_visit.visit_ipd_discharge_status', '=', 1)

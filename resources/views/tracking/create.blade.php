@@ -30,7 +30,7 @@
                                     <th></th>
                                     <th class="text-center">VN</th>
                                     <th class="text-center">HN</th>
-                                    <th class="">รหัสแพทย์</th>
+                                    <th class="">ชื่อผู้ป่วย</th>
                                     <th class=""><i class="fas fa-user-md"></i> แพทย์ผู้ตรวจ</th>
                                     <th class="text-center">สถานะ</th>
                                     <th class="text-center"><i class="far fa-calendar-check"></i> วันที่ Discharge</th>
@@ -60,7 +60,11 @@
             { 'data': 'visit_vn', className: "text-center" },
             { 'data': 'visit_vn', className: "text-center" },
             { 'data': 'visit_hn', className: "text-center" },
-            { 'data': 'visit_patient_self_doctor' },
+            { 'data': 'patient_firstname',
+                render: function (data, type, row, meta) {
+                return row.patient_firstname + ' ' + row.patient_lastname
+            }
+            },
             { 'data': 'employee_firstname',
                 render: function (data, type, row, meta) {
                 return row.employee_firstname + ' ' + row.employee_lastname

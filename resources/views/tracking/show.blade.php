@@ -108,6 +108,7 @@
                                 <tr>
                                     <th class="text-center">เลข VN</th>
                                     <th class="text-center"><i class="fas fa-id-card"></i> เลข HN</th>
+                                    <th><i class="fas fa-user-md"></i> ผู้ป่วย</th>
                                     <th><i class="fas fa-user-md"></i> แพทย์</th>
                                     <th class="text-center"><i class="far fa-clock"></i> วันที่/เวลา Admit</th>
                                     <th class="text-center"><i class="far fa-clock"></i> วันที่ส่งชาร์ท</th>
@@ -122,6 +123,7 @@
                                     <tr>
                                         <th class="text-center">{{ $lists->list_vn }}</th>
                                         <td class="text-center">{{ $lists->list_hn }}</td>
+                                        <td>{{ $lists->list_patient }}</td>
                                         <td>{{ $lists->list_doctor }}</td>
                                         <td class="text-center">{{ $lists->list_discharge }}</td>
                                         <td class="text-center text-primary">{{ $lists->list_start}}</td>

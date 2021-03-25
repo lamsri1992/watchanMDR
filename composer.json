@@ -47,6 +47,9 @@
         ]
     },
     "autoload-dev": {
+        "files": [
+            "app/exdate.php"
+        ],
         "psr-4": {
             "Tests\\": "tests/"
         }

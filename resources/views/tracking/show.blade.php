@@ -94,55 +94,53 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="container-fluid">
-                        @if ($message = Session::get('keep'))
-                        <div id="alert" class="alert alert-success alert-block">
-                            <button type="button" class="close" data-dismiss="alert">×</button>	
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @endif
-                        <h6><i class="fa fa-clipboard-list"></i> รายการเวชระเบียนผู้ป่วยใน</h6>
-                        <table class="table table-striped table-borderless table-bordered table-sm">
-                            <thead class="thead-dark">
+                <div class="col-md-12">
+                    @if ($message = Session::get('keep'))
+                    <div id="alert" class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>	
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
+                    <h6><i class="fa fa-clipboard-list"></i> รายการเวชระเบียนผู้ป่วยใน</h6>
+                    <table class="table table-striped table-borderless table-bordered table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">เลข VN</th>
+                                <th class="text-center"><i class="fas fa-id-card"></i> เลข HN</th>
+                                <th><i class="fas fa-user-md"></i> ผู้ป่วย</th>
+                                <th><i class="fas fa-user-md"></i> แพทย์</th>
+                                <th class="text-center"><i class="far fa-clock"></i> วันที่ส่งชาร์ท</th>
+                                <th class="text-center"><i class="far fa-clock"></i> วันที่เก็บชาร์ท</th>
+                                <th class="text-center">สถานะ</th>
+                                @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
+                                    <th class="text-center"><i class="fa fa-clipboard-check"></i></th>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($list as $lists)
+                            @php $exp = DateDiff(SUBSTR($lists->list_end,0,10),SUBSTR($lists->list_start,0,10)) @endphp
                                 <tr>
-                                    <th class="text-center">เลข VN</th>
-                                    <th class="text-center"><i class="fas fa-id-card"></i> เลข HN</th>
-                                    <th><i class="fas fa-user-md"></i> ผู้ป่วย</th>
-                                    <th><i class="fas fa-user-md"></i> แพทย์</th>
-                                    <th class="text-center"><i class="far fa-clock"></i> วันที่/เวลา Admit</th>
-                                    <th class="text-center"><i class="far fa-clock"></i> วันที่ส่งชาร์ท</th>
-                                    <th class="text-center">สถานะ</th>
+                                    <th class="text-center">{{ $lists->list_vn }}</th>
+                                    <td class="text-center">{{ $lists->list_hn }}</td>
+                                    <td>{{ $lists->list_patient }}</td>
+                                    <td>{{ $lists->list_doctor }}</td>
+                                    <td class="text-center">{{ DateThai(SUBSTR($lists->list_start,0,10)) }}</td>
+                                    <td class="text-center text-primary">{{ DateThai(SUBSTR($lists->list_end,0,10)) }}</td>
+                                    <td class="text-center {{ $lists->t_stat_color }}">
+                                        @php echo $lists->t_stat_text @endphp
                                     @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
-                                        <th class="text-center"><i class="fa fa-clipboard-check"></i></th>
+                                    <td class="text-center">
+                                        <a class="btn btn-success btn-sm" href="{{ route('tracking.keepChart',base64_encode($lists->list_id)) }}" 
+                                            class="btn btn-info btn-sm" onclick="return confirm('ยืนยันการเก็บชาร์ท VN: {{ $lists->list_vn }}')">
+                                            <i class="fa fa-clipboard-check"></i> เก็บชาร์ท
+                                        </a>
+                                    </td>
                                     @endif
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($list as $lists)
-                                    <tr>
-                                        <th class="text-center">{{ $lists->list_vn }}</th>
-                                        <td class="text-center">{{ $lists->list_hn }}</td>
-                                        <td>{{ $lists->list_patient }}</td>
-                                        <td>{{ $lists->list_doctor }}</td>
-                                        <td class="text-center">{{ $lists->list_discharge }}</td>
-                                        <td class="text-center text-primary">{{ $lists->list_start}}</td>
-                                        <td class="text-center {{ $lists->t_stat_color }}">
-                                            @php echo $lists->t_stat_text @endphp
-                                        </td>
-                                        @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
-                                        <td class="text-center">
-                                            <a class="btn btn-success btn-sm" href="{{ route('tracking.keepChart',base64_encode($lists->list_id)) }}" 
-                                                class="btn btn-info btn-sm" onclick="return confirm('ยืนยันการเก็บชาร์ท VN: {{ $lists->list_vn }}')">
-                                                <i class="fa fa-clipboard-check"></i> เก็บชาร์ท
-                                            </a>
-                                        </td>
-                                        @endif
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <div class="card-body">
                     <div class="container-fluid text-center">

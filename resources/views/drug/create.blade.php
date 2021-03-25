@@ -79,10 +79,6 @@
             [10, 50, 100, "All"]
         ],
         scrollX: true,
-        // responsive: true,
-        // rowReorder: {
-        //     selector: 'td:nth-child(2)'
-        // },
         oLanguage: {
             oPaginate: {
                 sFirst: '<small>หน้าแรก</small>',

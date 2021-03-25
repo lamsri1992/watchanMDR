@@ -40,6 +40,7 @@
                         <table id="trackList" class="display nowrap table responsive" width="100%">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th class=""><i class="fa fa-check-circle"></i>&nbsp;</th>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">หมายเลข VN</th>
                                     <th class="text-center">หมายเลข HN</th>
@@ -52,6 +53,7 @@
                             <tbody>
                                 @foreach ($data as $list)
                                 <tr>
+                                    <th></th>
                                     <th class="text-center">ODL23736{{ str_pad($list->drug_id, 4, '0', STR_PAD_LEFT) }}</th>
                                     <td class="text-center">{{ $list->drug_vn }}</td>
                                     <td class="text-center">{{ $list->drug_hn }}</td>
@@ -90,6 +92,24 @@
 <script>
     $(document).ready(function () {
         $('#trackList').dataTable({
+            columnDefs: [
+            {
+                'targets': 0,
+                'checkboxes': {
+                'selectRow': false
+                }
+            }
+            ],
+            select: {
+                'style': 'multiple'
+            },
+            language: {
+                select: {
+                    rows: {
+                        _: "<small class='text-danger'>เลือกแล้ว %d รายการ</small>",
+                    }
+                }
+            },
             lengthMenu: [
                 [10, 25, 50, -1],
                 [10, 25, 50, "All"]
@@ -99,7 +119,7 @@
                 selector: 'td:nth-child(2)'
             },
             order: [
-                [0, 'desc']
+                [1, 'desc']
             ],
             oLanguage: {
                 oPaginate: {

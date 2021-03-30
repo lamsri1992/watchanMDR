@@ -123,7 +123,7 @@
                 <li
                 class="nav-item {{ (request()->is('token')) ? 'active' : '' }}">
                 <a class="nav-link" href="/token">
-                    <i class="fab fa-line text-success"></i> ตั้งค่า Line Token
+                    <i class="fab fa-line text-success"></i> กำหนด Line Token
                 </a>
             </li>
             </ul>

@@ -75,12 +75,13 @@ class OrderListController extends Controller
                 'update_at' => $update,
             ]
         );
-
-        DB::connection('mysql')->table('tracking_list')->where('track_id', $id)->update(
-            [
-                'list_start' => $update,
-            ]
-        );
+        if($point <= 2){
+            DB::connection('mysql')->table('tracking_list')->where('track_id', $id)->update(
+                [
+                    'list_start' => $update,
+                ]
+            );
+        }
         if($point == 2){
             $place = 'งานเภสัชกรรม';
         }

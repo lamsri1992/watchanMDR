@@ -47,6 +47,12 @@ Route::group(['prefix' => 'users'], function () {
 	Route::post('/addUser','AccountController@addUser');
 });
 
+Route::group(['prefix' => 'token'], function () {
+	Route::get('/','TokenController@index')->name('token.index');
+	Route::post('/addToken','TokenController@addToken');
+	Route::get('/{id}','TokenController@show')->name('token.show');
+});
+
 Route::group(['prefix' => 'store'], function () {
 	Route::get('/', function () { return view('store.index'); });
 });

@@ -112,9 +112,9 @@
                                 <th class="text-center"><i class="far fa-clock"></i> วันที่ส่งชาร์ท</th>
                                 <th class="text-center"><i class="far fa-clock"></i> วันที่เก็บชาร์ท</th>
                                 <th class="text-center">สถานะ</th>
-                                @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
+                                {{-- @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1) --}}
                                     <th class="text-center"><i class="fa fa-clipboard-check"></i></th>
-                                @endif
+                                {{-- @endif --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -129,13 +129,17 @@
                                     <td class="text-center text-primary">{{ DateThai(SUBSTR($lists->list_end,0,10)) }}</td>
                                     <td class="text-center {{ $lists->t_stat_color }}">
                                         @php echo $lists->t_stat_text @endphp
-                                    @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
+                                    @if ($order->track_point == 2  && $count >= 1 && $lists->list_status == 1 && Auth::user()->permission_id == 1)
                                     <td class="text-center">
-                                        <a class="btn btn-success btn-sm" href="{{ route('tracking.keepChart',base64_encode($lists->list_id)) }}" 
+                                        <a  href="{{ route('tracking.keepChart',base64_encode($lists->list_id)) }}" 
                                             class="btn btn-info btn-sm" onclick="return confirm('ยืนยันการเก็บชาร์ท VN: {{ $lists->list_vn }}')">
                                             <i class="fa fa-clipboard-check"></i> เก็บชาร์ท
                                         </a>
                                     </td>
+                                    @else
+                                    <td class="text-center">
+                                        <span><i class="fa fa-check text-success"></i> เก็บแล้ว</span> 
+                                    </td>  
                                     @endif
                                 </tr>
                             @endforeach

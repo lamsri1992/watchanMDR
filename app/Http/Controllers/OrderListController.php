@@ -12,7 +12,22 @@ class OrderListController extends Controller
         $data = DB::connection('mysql')->table('tracking_order')
                 ->leftJoin('track_status', 'track_status.t_stat_id', '=', 'tracking_order.track_status')
                 ->get();
-        return view('tracking.index', ['data'=>$data]);
+        $track_all = DB::connection('mysql')->table('tracking_order')
+                ->count();
+        $track_complete = DB::connection('mysql')->table('tracking_order')
+                ->where('track_status', 2)
+                ->count();
+        $list_all = DB::connection('mysql')->table('tracking_list')
+                ->count();
+        $list_complete = DB::connection('mysql')->table('tracking_list')
+                ->where('list_status', 2)
+                ->count();
+        $doctor = DB::connection('mysql')->select(DB::raw("SELECT
+                (SELECT COUNT(*) FROM tracking_list WHERE list_status = '1' AND list_doctor = 'ประจินต์ เหล่าเที่ยง') AS pj,
+                (SELECT COUNT(*) FROM tracking_list WHERE list_status = '1' AND list_doctor = 'นัฐยา กิติกูล') AS nt,
+                (SELECT COUNT(*) FROM tracking_list WHERE list_status = '1' AND list_doctor = 'ชาติชาย เชวงชุติรัตน์') AS cc"));
+        return view('tracking.index', ['data'=>$data,'track_all'=>$track_all,'track_complete'=>$track_complete,'list_all'=>$list_all,'list_complete'=>$list_complete,'doctor'=>$doctor]);
+        // return dd($doctor);
     }
 
     function show($id)

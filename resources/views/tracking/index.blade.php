@@ -21,8 +21,9 @@
                         </div>
                     </div>
                 </div>
+                @include('tracking.card')
                 <div class="card-body">
-                    <div class="container-fluid">
+                    <div class="container-fluid" style="margin-top: -2rem;">
                         <div class="row" style="margin-bottom: 1rem;">
                             <div class="col-6">
                                 <h2>รายการเวชระเบียนผู้ป่วยในทั้งหมด</h2>

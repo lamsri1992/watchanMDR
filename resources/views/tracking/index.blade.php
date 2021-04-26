@@ -5,6 +5,11 @@
 @endif
 <div class="header bg-gradient-primary pb-8 pt-5"></div>
 <div class="container-fluid mt--7">
+    <div class="alert alert-danger alert-block text-center">
+        <strong style="font-size: 20px;">โปรดอ่านก่อน <i class="fa fa-exclamation-triangle"></i></strong><br>
+        <span>ก่อนสร้าง Tracking List ใหม่ กรุณาตรวจสอบ VN เวชระเบียนก่อนทุกครั้ง</span><br>
+        <small class="badge badge-light text-white">ระวังข้อมูลเวชระเบียนซ้ำกันใน Tracking List</small>
+    </div>
     <div class="row">
         <div class="col-xl-12 mb-5 mb-xl-0">
             <div class="card">
@@ -46,7 +51,7 @@
                                 @foreach ($data as $order)
                                 <tr>
                                     <th class="text-center">WCC23736{{ str_pad($order->track_id, 4, '0', STR_PAD_LEFT) }}</th>
-                                    <td class="text-center"><span class="badge badge-danger" style="font-size: 14px;">{{ $order->track_case }} เคส</span></td>
+                                    <td class="text-center"><span class="badge badge-danger btn-block" style="font-size: 14px;">{{ $order->track_case }} เคส</span></td>
                                     <td class="text-center">{{ $order->create_at }}</td>
                                     <td class="text-center {{ $order->t_stat_color }}">@php echo $order->t_stat_text @endphp</td>
                                     <td class="text-center">

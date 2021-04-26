@@ -27,7 +27,6 @@ class OrderListController extends Controller
                 (SELECT COUNT(*) FROM tracking_list WHERE list_status = '1' AND list_doctor = 'นัฐยา กิติกูล') AS nt,
                 (SELECT COUNT(*) FROM tracking_list WHERE list_status = '1' AND list_doctor = 'ชาติชาย เชวงชุติรัตน์') AS cc"));
         return view('tracking.index', ['data'=>$data,'track_all'=>$track_all,'track_complete'=>$track_complete,'list_all'=>$list_all,'list_complete'=>$list_complete,'doctor'=>$doctor]);
-        // return dd($doctor);
     }
 
     function show($id)
@@ -54,11 +53,7 @@ class OrderListController extends Controller
         $data = $request->get('formData');
         $case = count($data);
         // Create Order
-        $OrderID = DB::connection('mysql')->table('tracking_order')->insertGetId(
-            [
-                'track_case' => $case,
-            ]
-        );
+        $OrderID = DB::connection('mysql')->table('tracking_order')->insertGetId(['track_case' => $case]);
         $text = "";
         foreach($data as $array){
             DB::connection('mysql')->table('tracking_list')->insert(

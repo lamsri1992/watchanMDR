@@ -70,15 +70,15 @@
                         <div
                             class="step {{ ($order->track_point >= "1" ? "active" : "") }}">
                             <span class="icon" data-toggle="tooltip" data-placement="top"
-                                title="งานผู้ป่วยในดำเนินการ Discharge"><i class="fa fa-clipboard-check"></i></span>
+                                title="งานผู้ป่วยในดำเนินการ Discharge และนำส่งงานเวชระเบียน"><i class="fa fa-clipboard-check"></i></span>
                             <span class="text">IPD Discharge</span>
                         </div>
                         <div
                             class="step {{ ($order->track_point >= "2" ? "active" : "") }}">
                             <span class="icon" data-toggle="tooltip" data-placement="top"
-                                title="งานเภสัชกรรมตรวจสอบเวชระเบียนผู้ป่วยใน + พิมพ์ใบ 16 รายการ"><i
+                                title="งานเวชระเบียนตรวจสอบเวชระเบียนผู้ป่วยใน ก่อนจำหน่ายตามแพทย์เจ้าของเคส"><i
                                     class="fa fa-notes-medical"></i></span>
-                            <span class="text">งานเภสัชกรรม</span>
+                            <span class="text">งานเวชระเบียน</span>
                         </div>
                         <div
                             class="step {{ ($order->track_point >= "3" ? "active" : "") }}">
@@ -145,21 +145,21 @@
                 </div>
                 <div class="card-body">
                     <div class="container-fluid text-center">
-                            @if($order->track_point == 1 && Auth::user()->permission_id == 1 || Auth::user()->permission_id == 2)
+                            @if($order->track_point == 1 && Auth::user()->permission_id == 1)
                             @if ($order->track_point == 2)
                                 @php $btn = 'disabled'; @endphp
                             @else
                                 @php $btn = ''; @endphp
                             @endif
-                            <button id="phar_complete" class="btn btn-success" data-id="{{ $order->track_id }}"
+                            <button id="mdcheck_complete" class="btn btn-success" data-id="{{ $order->track_id }}"
                                 data-point="{{ $order->track_point }}" {{ $btn }}>
-                                <i class="fas fa-check-circle"></i> เภสัชกรรมดำเนินการ
+                                <i class="fas fa-check-circle"></i> ตรวจสอบเวชระเบียนเสร็จสิ้น
                             </button>
                             @endif
                             @if($order->track_point == 2 && $count == 0 && Auth::user()->permission_id == 1)
                             <button id="doctor_complete" class="btn btn-success" data-id="{{ $order->track_id }}"
                                 data-point="{{ $order->track_point }}">
-                                <i class="fas fa-sign-out-alt"></i> ดำเนินการขั้นตอนกลุ่มการแพทย์
+                                <i class="fas fa-sign-out-alt"></i> เก็บคืนเวชระเบียนเสร็จสิ้น
                             </button>
                             @endif
                             @if(Auth::user()->permission_id == 1 && $order->track_point == 3)
@@ -188,14 +188,14 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 
-    $('#phar_complete').on('click', function () {
+    $('#mdcheck_complete').on('click', function () {
         var formID = $(this).attr('data-id');
         var formData = $(this).attr('data-point');
         var token = "{{ csrf_token() }}";
         event.preventDefault();
         Swal.fire({
             title: 'ยืนยันการดำเนินการ ?',
-            text: 'เภสัชกรรมทำการพิมพ์ใบ 16 รายการเสร็จสิ้น',
+            text: 'ตรวจสอบเวชระเบียนเสร็จสิ้น',
             showCancelButton: true,
             confirmButtonText: `ดำเนินการ`,
             cancelButtonText: `ยกเลิก`,
@@ -232,7 +232,7 @@
         event.preventDefault();
         Swal.fire({
             title: 'ยืนยันการดำเนินการ ?',
-            text: 'ดำเนินการขั้นตอนกลุ่มการแพทย์เสร็จสิ้น',
+            text: 'เก็บคืนเวชระเบียนเสร็จสิ้น',
             showCancelButton: true,
             confirmButtonText: `ตกลง`,
             cancelButtonText: `ยกเลิก`,

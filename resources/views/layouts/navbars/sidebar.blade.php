@@ -76,7 +76,7 @@
                 <li
                     class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }}">
                     <a class="nav-link" href="/drugOrder">
-                        <i class="fas fa-notes-medical text-danger"></i> ระบบออเดอร์ผู้ป่วยใน
+                        <i class="fas fa-notes-medical text-danger"></i> ระบบออเดอร์ผู้ป่วย
                     </a>
                 </li>
                 <li

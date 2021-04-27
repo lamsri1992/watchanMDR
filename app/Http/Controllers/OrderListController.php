@@ -95,10 +95,10 @@ class OrderListController extends Controller
             );
         }
         if($point == 2){
-            $place = 'งานเภสัชกรรม';
+            $place = 'ตรวจสอบเวชระเบียนเสร็จสิ้น';
         }
         if($point == 3){
-            $place = 'กลุ่มการแพทย์';
+            $place = 'เก็บคืนเวชระเบียนเสร็จสิ้น';
         }
         $notify_id = str_pad($id, 4, '0', STR_PAD_LEFT);
         // send line message

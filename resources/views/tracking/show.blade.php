@@ -94,54 +94,56 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    @if ($message = Session::get('keep'))
-                    <div id="alert" class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>	
-                        <strong>{{ $message }}</strong>
-                    </div>
-                    @endif
-                    <h6><i class="fa fa-clipboard-list"></i> รายการเวชระเบียนผู้ป่วยใน</h6>
-                    <table class="table table-striped table-borderless table-bordered table-sm">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th class="text-center">เลข VN</th>
-                                <th class="text-center"><i class="fas fa-id-card"></i> เลข HN</th>
-                                <th><i class="fas fa-user-md"></i> ผู้ป่วย</th>
-                                <th><i class="fas fa-user-md"></i> แพทย์</th>
-                                <th class="text-center"><i class="far fa-clock"></i> วันที่ส่งชาร์ท</th>
-                                <th class="text-center"><i class="far fa-clock"></i> วันที่เก็บชาร์ท</th>
-                                <th class="text-center">สถานะ</th>
-                                @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
-                                    <th class="text-center"><i class="fa fa-clipboard-check"></i></th>
-                                @endif
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($list as $lists)
-                            @php $exp = DateDiff(SUBSTR($lists->list_end,0,10),SUBSTR($lists->list_start,0,10)) @endphp
+                <div class="card-body">
+                    <div class="container-fluid">
+                        @if ($message = Session::get('keep'))
+                        <div id="alert" class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>	
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @endif
+                        <h6><i class="fa fa-clipboard-list"></i> รายการเวชระเบียนผู้ป่วยใน</h6>
+                        <table id="chartList" class="display nowrap table" style="width:100%">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <th class="text-center">{{ $lists->list_vn }}</th>
-                                    <td class="text-center">{{ $lists->list_hn }}</td>
-                                    <td>{{ $lists->list_patient }}</td>
-                                    <td>{{ $lists->list_doctor }}</td>
-                                    <td class="text-center">{{ DateThai(SUBSTR($lists->list_start,0,10)) }}</td>
-                                    <td class="text-center text-primary">{{ DateThai(SUBSTR($lists->list_end,0,10)) }}</td>
-                                    <td class="text-center {{ $lists->t_stat_color }}">
-                                        @php echo $lists->t_stat_text @endphp
-                                    </td>
-                                    @if ($order->track_point == 2  && $count >= 1 && $lists->list_status == 1 && Auth::user()->permission_id == 1)
-                                    <td class="text-center">
-                                        <a  href="{{ route('tracking.keepChart',base64_encode($lists->list_id)) }}" 
-                                            class="btn btn-info btn-sm" onclick="return confirm('ยืนยันการเก็บชาร์ท VN: {{ $lists->list_vn }}')">
-                                            <i class="fa fa-clipboard-check"></i> เก็บชาร์ท
-                                        </a>
-                                    </td>
+                                    <th class="text-center">เลข VN</th>
+                                    <th class="text-center"><i class="fas fa-id-card"></i> เลข HN</th>
+                                    <th><i class="fas fa-user-md"></i> ผู้ป่วย</th>
+                                    <th><i class="fas fa-user-md"></i> แพทย์</th>
+                                    <th class="text-center"><i class="far fa-clock"></i> วันที่ส่งชาร์ท</th>
+                                    <th class="text-center"><i class="far fa-clock"></i> วันที่เก็บชาร์ท</th>
+                                    <th class="text-center">สถานะ</th>
+                                    @if ($order->track_point == 2  && $count >= 1 && Auth::user()->permission_id == 1)
+                                        <th class="text-center"><i class="fa fa-clipboard-check"></i></th>
                                     @endif
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($list as $lists)
+                                @php $exp = DateDiff(SUBSTR($lists->list_end,0,10),SUBSTR($lists->list_start,0,10)) @endphp
+                                    <tr>
+                                        <th class="text-center">{{ $lists->list_vn }}</th>
+                                        <td class="text-center">{{ $lists->list_hn }}</td>
+                                        <td>{{ $lists->list_patient }}</td>
+                                        <td>{{ $lists->list_doctor }}</td>
+                                        <td class="text-center">{{ DateThai(SUBSTR($lists->list_start,0,10)) }}</td>
+                                        <td class="text-center text-primary">{{ DateThai(SUBSTR($lists->list_end,0,10)) }}</td>
+                                        <td class="text-center {{ $lists->t_stat_color }}">
+                                            @php echo $lists->t_stat_text @endphp
+                                        </td>
+                                        @if ($order->track_point == 2  && $count >= 1 && $lists->list_status == 1 && Auth::user()->permission_id == 1)
+                                        <td class="text-center">
+                                            <a  href="{{ route('tracking.keepChart',base64_encode($lists->list_id)) }}" 
+                                                class="btn btn-info btn-sm" onclick="return confirm('ยืนยันการเก็บชาร์ท VN: {{ $lists->list_vn }}')">
+                                                <i class="fa fa-clipboard-check"></i> เก็บชาร์ท
+                                            </a>
+                                        </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="container-fluid text-center">
@@ -184,6 +186,32 @@
 @endsection
 @section('script')
 <script>
+
+    $(document).ready(function () {
+        $('#chartList').dataTable({
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            order: [
+                [0, 'desc']
+            ],
+            scrollX: true,
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<small>หน้าแรก</small>',
+                    sLast: '<small>หน้าสุดท้าย</small>',
+                    sNext: '<small>ถัดไป</small>',
+                    sPrevious: '<small>กลับ</small>'
+                },
+                sSearch: '<small>ค้นหา</small>',
+                sInfo: '<small>ทั้งหมด _TOTAL_ รายการ</small>',
+                sLengthMenu: '<small>แสดง _MENU_ รายการ</small>',
+                sInfoEmpty: '<small>ไม่มีข้อมูล</small>'
+            }
+        });
+    });
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })

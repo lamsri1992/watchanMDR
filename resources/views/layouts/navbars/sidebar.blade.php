@@ -79,8 +79,14 @@
                         <i class="fas fa-notes-medical text-danger"></i> ระบบออเดอร์ผู้ป่วยใน
                     </a>
                 </li>
+                <li
+                    class="nav-item {{ (request()->is('foodOrder')) ? 'active' : '' }}">
+                    <a class="nav-link" href="/foodOrder">
+                        <i class="fas fa-utensils text-warning"></i> ระบบสั่งอาหารผู้ป่วย
+                    </a>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#navbar-office" data-toggle="collapse" role="button" aria-expanded="true"
+                    <a class="nav-link" href="#navbar-office" data-toggle="collapse" role="button" aria-expanded="false"
                         aria-controls="navbar-office">
                         <i class="fas fa-folder-open text-success"></i>
                         <span

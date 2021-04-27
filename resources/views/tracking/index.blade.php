@@ -10,6 +10,7 @@
         <span>ก่อนสร้าง Tracking List ใหม่ กรุณาตรวจสอบ VN เวชระเบียนก่อนทุกครั้ง</span><br>
         <small class="badge badge-light text-white">ระวังข้อมูลเวชระเบียนซ้ำกันใน Tracking List</small>
     </div>
+    @include('tracking.card')
     <div class="row">
         <div class="col-xl-12 mb-5 mb-xl-0">
             <div class="card">
@@ -26,9 +27,8 @@
                         </div>
                     </div>
                 </div>
-                @include('tracking.card')
                 <div class="card-body">
-                    <div class="container-fluid" style="margin-top: -2rem;">
+                    <div class="container-fluid">
                         <div class="row" style="margin-bottom: 1rem;">
                             <div class="col-6">
                                 <h2>รายการเวชระเบียนผู้ป่วยในทั้งหมด</h2>
@@ -44,6 +44,7 @@
                                     <th class="text-center">จำนวน</th>
                                     <th class="text-center"><i class="far fa-calendar-plus"></i> วันที่สร้าง</th>
                                     <th class="text-center">สถานะ</th>
+                                    <th class="text-center">จุดที่ดำเนินการล่าสุด</th>
                                     <th class="text-center">ตัวเลือก</th>
                                 </tr>
                             </thead>
@@ -51,9 +52,10 @@
                                 @foreach ($data as $order)
                                 <tr>
                                     <th class="text-center">WCC23736{{ str_pad($order->track_id, 4, '0', STR_PAD_LEFT) }}</th>
-                                    <td class="text-center"><span class="badge badge-danger btn-block" style="font-size: 14px;">{{ $order->track_case }} เคส</span></td>
+                                    <td class="text-center"><span class="badge badge-success btn-block" style="font-size: 14px;">{{ $order->track_case }} เคส</span></td>
                                     <td class="text-center">{{ $order->create_at }}</td>
                                     <td class="text-center {{ $order->t_stat_color }}">@php echo $order->t_stat_text @endphp</td>
+                                    <td class="text-center">{{ $order->point_name }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('tracking.show',base64_encode($order->track_id)) }}" class="btn btn-info btn-sm">
                                             <i class="fa fa-search"></i> ติดตามเวชระเบียน

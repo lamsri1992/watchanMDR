@@ -35,22 +35,28 @@
                                     <th class="text-center">ID</th>
                                     <th class="text-center">หมายเลข VN</th>
                                     <th class="text-center">หมายเลข HN</th>
-                                    <th class="text-center">ผู้ป่วย</th>
-                                    <th class="text-center">เตียง/ห้อง</th>
-                                    <th class="text-center"><i class="far fa-calendar-plus"></i> วันที่สร้าง</th>
+                                    <th><i class="far fa-id-card"></i> ผู้ป่วย</th>
+                                    <th><i class="fa fa-bed"></i> เตียง/ห้อง</th>
+                                    <th><i class="far fa-calendar-plus"></i> วันที่สร้าง</th>
                                     <th class="text-center">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr> --}}
+                                @foreach ($data as $list)
+                                <tr>
+                                    <th class="text-center">FOD23736{{ str_pad($list->food_id, 4, '0', STR_PAD_LEFT) }}</th>
+                                    <td class="text-center">{{ $list->food_vn }}</td>
+                                    <td class="text-center">{{ $list->food_hn }}</td>
+                                    <td>{{ $list->food_patient }}</td>
+                                    <td>{{ $list->food_bed }}</td>
+                                    <td>{{ $list->create_at }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('food.show',base64_encode($list->food_id)) }}" class="btn btn-info btn-sm btn-block">
+                                            <i class="fa fa-search"></i> รายละเอียด
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

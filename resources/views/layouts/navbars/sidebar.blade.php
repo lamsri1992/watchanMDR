@@ -74,13 +74,13 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li
-                    class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }}">
+                    class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }} {{ (request()->is('drugOrder/createDrugOrder')) ? 'active' : '' }}">
                     <a class="nav-link" href="/drugOrder">
                         <i class="fas fa-notes-medical text-danger"></i> ระบบออเดอร์ผู้ป่วย
                     </a>
                 </li>
                 <li
-                    class="nav-item {{ (request()->is('foodOrder')) ? 'active' : '' }}">
+                    class="nav-item {{ (request()->is('foodOrder')) ? 'active' : '' }} {{ (request()->is('foodOrder/createFoodOrder')) ? 'active' : '' }}">
                     <a class="nav-link" href="/foodOrder">
                         <i class="fas fa-utensils text-warning"></i> ระบบสั่งอาหารผู้ป่วย
                     </a>

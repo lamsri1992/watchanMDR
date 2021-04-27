@@ -40,6 +40,9 @@ Route::group(['prefix' => 'drugOrder'], function () {
 
 Route::group(['prefix' => 'foodOrder'], function () {
 	Route::get('/','foodOrderController@index')->name('food.index');
+	Route::get('/createFoodOrder', function () { return view('food.create'); });
+    Route::post('/createOrder','foodOrderController@createOrder')->name('food.createOrder');
+	Route::get('/{id}','foodOrderController@show')->name('food.show');
 });
 
 Route::group(['prefix' => 'search'], function () {

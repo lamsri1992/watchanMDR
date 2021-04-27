@@ -76,7 +76,7 @@
                 [10, 25, 50, "All"]
             ],
             order: [
-                [1, 'desc']
+                [0, 'desc']
             ],
             scrollX: true,
             oLanguage: {

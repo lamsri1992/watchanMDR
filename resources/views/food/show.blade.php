@@ -7,6 +7,12 @@
 <div class="container-fluid mt--7">
     <div class="row">
         <div class="col-xl-12 mb-5 mb-xl-0">
+            @if ($message = Session::get('add'))
+            <div id="alert" class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                <span><i class="fa fa-check-circle"></i> {{ $message }}</span>
+            </div>
+            @endif
             <div class="card">
                 <div class="card-header bg-transparent">
                     <div class="row align-items-center">
@@ -49,28 +55,32 @@
                                     </tr>
                                     <tr>
                                         <th class="text-center"><i class="fa fa-calendar-plus"></i> วันที่สร้าง</th>
-                                        <td>{{ $list->create_at }}</td>
+                                        <td>{{ DateTimeThai($list->create_at) }}</td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="col-md-8">
                                 <table class="table table-striped table-borderless table-sm">
                                     <tr>
-                                        <th>ID</th>
+                                        <th class="text-center">ID</th>
                                         <th>ประเภทอาหาร</th>
                                         <th>รายการอาหาร</th>
                                         <th>วันที่สั่งรายการ</th>
-                                        <th>สถานะ</th>
+                                        <th class="text-center">สถานะ</th>
                                     </tr>
-                                    @if (isset($order))
-                                    <tr>
-                                        <td class="text-center" colspan="5">
-                                            <small class="text-danger" style="text-decoration: underline;">
-                                                ไม่มีรายการอาหาร กรุณาสร้างรายการอาหาร
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    @endif
+                                    @foreach ($order as $od)
+                                        <tr>
+                                            <td class="text-center">{{ $od->fo_id }}</td>
+                                            <td>{{ $od->ft_name }}</td>
+                                            <td>{{ $od->fl_name }}</td>
+                                            <td>{{ DateTimeThai($od->fo_date) }}</td>
+                                            <td class="text-center">
+                                                <span class="badge badge-{{ $od->fs_icon }} btn-block">
+                                                    {{ $od->fs_name }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
@@ -81,12 +91,15 @@
                         <div style="margin-bottom: 2rem;">
                             <i class="fa fa-clipboard-check"></i> แบบบันทึกรายการอาหารผู้ป่วย
                         </div>
-                        <form>
+                        <form action="{{ url('/foodOrder/addOrder') }}" method="POST">
+                            {{ csrf_field() }}
+                            {{ method_field('POST') }}
+                            <input type="hidden" name="food_id" value="{{ $list->food_id }}">
                             <div class="form-row text-center">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck" value="1">
+                                            <input id="gridCheck" name="gridCheck" class="form-check-input" type="checkbox" value="1">
                                             <label class="form-check-label" for="gridCheck">
                                                 NPO (งดน้ำและอาหาร)
                                             </label>
@@ -97,7 +110,7 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <select id="food_type" name="food_type" class="js-single">
-                                                <option>เลือกประเภทอาหาร</option>
+                                                <option value="">เลือกประเภทอาหาร</option>
                                                 <option value="1">อาหารธรรมดา</option>
                                                 <option value="2">อาหารอ่อน</option>
                                                 <option value="3">โจ๊ก</option>
@@ -112,7 +125,7 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <select id="food_list" name="food_list" class="js-single">
-                                                <option>เลือกรายการอาหาร</option>
+                                                <option value="">เลือกรายการอาหาร</option>
                                                 <option value="2">ลดไขมัน</option>
                                                 <option value="3">ลดเค็ม</option>
                                                 <option value="4">เบาหวาน</option>
@@ -126,8 +139,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-right">
-                                <button type="submit" class="btn btn-success btn-sm">บันทึกการสั่งอาหาร</button>
+                            <div class="text-right" style="margin-top: -2rem;">
+                                <button type="button" class="btn btn-success" 
+                                onclick=
+                                "Swal.fire({
+                                    title: 'บันทึกรายการอาหารผู้ป่วย ?',
+                                    text: '{{ 'VN:'.$list->food_vn.' '.$list->food_patient }}',
+                                    showCancelButton: true,
+                                    confirmButtonText: `บันทึกรายการ`,
+                                    cancelButtonText: `ยกเลิก`,
+                                  }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        form.submit();
+                                    } else if (result.isDenied) {
+                                        form.reset();
+                                    }
+                                })">บันทึกการสั่งอาหาร
+                                </button>
                             </div>
                         </form>
                     </div>

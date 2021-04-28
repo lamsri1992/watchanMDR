@@ -45,9 +45,30 @@ class foodOrderController extends Controller
                 ->where('food_id', $parm_id)
                 ->first();
         $order = DB::connection('mysql')->table('food_order')
+                ->leftJoin('food_list', 'food_list.fl_id', '=', 'food_order.fo_list')
+                ->leftJoin('food_type', 'food_type.ft_id', '=', 'food_order.fo_type')
+                ->leftJoin('food_status', 'food_status.fs_id', '=', 'food_order.fo_status')
                 ->where('order_id', $parm_id)
                 ->get();
         return view('food.show', ['list'=>$list,'order'=>$order]);
+    }
+
+    function addOrder(Request $request)
+    {
+        $parm_id = ($request->get('food_id'));
+        if($request->get('gridCheck') == 1){
+            $type = '7';
+        }else{
+            $type = $request->get('food_type');
+        }
+        DB::connection('mysql')->table('food_order')->insert(
+            [
+                'order_id' => $parm_id,
+                'fo_type' => $type,
+                'fo_list' => $request->get('food_list'),
+            ]
+        );
+        return back()->with("add","เพิ่มรายการอาหาร รหัส : FOD23736".str_pad($parm_id, 4, '0', STR_PAD_LEFT)." สำเร็จ");
     }
 
 }

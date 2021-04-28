@@ -42,6 +42,7 @@ Route::group(['prefix' => 'foodOrder'], function () {
 	Route::get('/','foodOrderController@index')->name('food.index');
 	Route::get('/createFoodOrder', function () { return view('food.create'); });
     Route::post('/createOrder','foodOrderController@createOrder')->name('food.createOrder');
+    Route::post('/addOrder','foodOrderController@addOrder')->name('food.addOrder');
 	Route::get('/{id}','foodOrderController@show')->name('food.show');
 });
 

@@ -73,12 +73,12 @@
             <h6 class="navbar-heading text-muted">เมนูระบบ</h6>
             <!-- Navigation -->
             <ul class="navbar-nav">
-                <li
+                {{-- <li
                     class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }} {{ (request()->is('drugOrder/createDrugOrder')) ? 'active' : '' }}">
                     <a class="nav-link" href="/drugOrder">
                         <i class="fas fa-notes-medical text-danger"></i> ระบบออเดอร์ผู้ป่วย
                     </a>
-                </li>
+                </li> --}}
                 <li
                     class="nav-item {{ (request()->is('foodOrder')) ? 'active' : '' }} {{ (request()->is('foodOrder/createFoodOrder')) ? 'active' : '' }}">
                     <a class="nav-link" href="/foodOrder">
@@ -93,7 +93,7 @@
                             class="nav-link-text">{{ __('ระบบงานเวชระเบียน') }}
                         </span>
                     </a>
-                    <div class="collapse {{ (request()->is('tracking')) ? 'show' : '' }}"
+                    <div class="collapse {{ (request()->is('tracking')) ? 'show' : '' }} {{ (request()->is('tracking/*')) ? 'show' : '' }}"
                         id="navbar-office">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
@@ -102,7 +102,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('tracking')) ? 'active' : '' }}"
+                                <a class="nav-link {{ (request()->is('tracking')) ? 'active' : '' }} {{ (request()->is('tracking/*')) ? 'active' : '' }}"
                                     href="/tracking">
                                     {{ __('ติดตามเวชระเบียนผู้ป่วยใน') }}
                                 </a>

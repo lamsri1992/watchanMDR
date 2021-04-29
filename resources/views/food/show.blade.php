@@ -57,12 +57,17 @@
                                         <th class="text-center"><i class="fa fa-calendar-plus"></i> วันที่สร้าง</th>
                                         <td>{{ DateTimeThai($list->create_at) }}</td>
                                     </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center">
+                                            <a href="#" class="badge badge-danger"><i class="fa fa-times-circle"></i> Discharge</a>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                             <div class="col-md-8">
                                 <table class="table table-striped table-borderless table-sm">
                                     <tr>
-                                        <th class="text-center">ID</th>
+                                        <th class="text-center">REF</th>
                                         <th>ประเภทอาหาร</th>
                                         <th>รายการอาหาร</th>
                                         <th>วันที่สั่งรายการ</th>
@@ -70,13 +75,13 @@
                                     </tr>
                                     @foreach ($order as $od)
                                         <tr>
-                                            <td class="text-center">{{ $od->fo_id }}</td>
+                                            <td class="text-center">{{ base64_encode($od->fo_id) }}</td>
                                             <td>{{ $od->ft_name }}</td>
                                             <td>{{ $od->fl_name }}</td>
                                             <td>{{ DateTimeThai($od->fo_date) }}</td>
                                             <td class="text-center">
-                                                <span class="badge badge-{{ $od->fs_icon }} btn-block">
-                                                    {{ $od->fs_name }}
+                                                <span class="badge badge-{{ $od->fs_text }} btn-block">
+                                                    <i class="{{ $od->fs_icon }}"></i> {{ $od->fs_name }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -95,15 +100,18 @@
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
                             <input type="hidden" name="food_id" value="{{ $list->food_id }}">
-                            <div class="form-row text-center">
-                                <div class="form-group col-md-4">
+                            <div class="form-row">
+                                <div class="form-group col-md-1 text-right">
                                     <div class="form-group">
-                                        <div class="form-check">
-                                            <input id="gridCheck" name="gridCheck" class="form-check-input" type="checkbox" value="1">
-                                            <label class="form-check-label" for="gridCheck">
-                                                NPO (งดน้ำและอาหาร)
-                                            </label>
-                                        </div>
+                                        <label class="custom-toggle">
+                                            <input type="checkbox" name="gridCheck" onchange="handleChange(this);" value="1">
+                                            <span class="custom-toggle-slider rounded-circle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2 text-left">
+                                    <div class="form-group">
+                                        <span class="text-danger"><i class="fa fa-ban"></i> NPO งดน้ำและอาหาร</span>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
@@ -135,7 +143,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="form-group">
-                                        <textarea id="note" name="note" class="form-control form-control-alternative" rows="5" placeholder="ระบุหมายเหตุการสั่งอาหาร (ถ้ามี)"></textarea>
+                                        <input id="note" name="note" class="form-control" placeholder="ระบุหมายเหตุการสั่งอาหาร (ถ้ามี)">
                                     </div>
                                 </div>
                             </div>
@@ -181,12 +189,18 @@
             $("#alert").slideUp(500);
         });
     });
-    
-    $('#gridCheck').click( function () {
-        document.getElementById("food_type").disabled = true;
-        document.getElementById("food_list").disabled = true;
-        document.getElementById("note").disabled = true;
-    });
 
+    function handleChange(checkbox) {
+        if(checkbox.checked == true){
+            document.getElementById("food_type").disabled = true;
+            document.getElementById("food_list").disabled = true;
+            document.getElementById("note").disabled = true;
+        }else{
+            document.getElementById("food_type").disabled = false;
+            document.getElementById("food_list").disabled = false;
+            document.getElementById("note").disabled = false;
+        }
+    }
+   
 </script>
 @endsection

@@ -80,7 +80,7 @@
                     </a>
                 </li> --}}
                 <li
-                    class="nav-item {{ (request()->is('foodOrder')) ? 'active' : '' }} {{ (request()->is('foodOrder/createFoodOrder')) ? 'active' : '' }}">
+                    class="nav-item {{ (request()->is('foodOrder')) ? 'active' : '' }} {{ (request()->is('foodOrder/*')) ? 'active' : '' }} {{ (request()->is('foodOrder/createFoodOrder')) ? 'active' : '' }} ">
                     <a class="nav-link" href="/foodOrder">
                         <i class="fas fa-utensils text-warning"></i> ระบบสั่งอาหารผู้ป่วย
                     </a>

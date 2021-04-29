@@ -58,14 +58,16 @@ class foodOrderController extends Controller
         $parm_id = ($request->get('food_id'));
         if($request->get('gridCheck') == 1){
             $type = '7';
+            $list = '4';
         }else{
             $type = $request->get('food_type');
+            $list = $request->get('food_list');
         }
         DB::connection('mysql')->table('food_order')->insert(
             [
                 'order_id' => $parm_id,
                 'fo_type' => $type,
-                'fo_list' => $request->get('food_list'),
+                'fo_list' => $list,
             ]
         );
         return back()->with("add","เพิ่มรายการอาหาร รหัส : FOD23736".str_pad($parm_id, 4, '0', STR_PAD_LEFT)." สำเร็จ");

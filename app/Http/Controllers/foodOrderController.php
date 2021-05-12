@@ -68,9 +68,41 @@ class foodOrderController extends Controller
                 'order_id' => $parm_id,
                 'fo_type' => $type,
                 'fo_list' => $list,
+                'fo_note' => $request->get('note'),
             ]
         );
         return back()->with("add","เพิ่มรายการอาหาร รหัส : FOD23736".str_pad($parm_id, 4, '0', STR_PAD_LEFT)." สำเร็จ");
+    }
+
+    function change($id)
+    {
+        $parm_id = base64_decode($id);
+        $data = DB::connection('mysql')->table('food_order')
+                ->where('fo_id', $parm_id)
+                ->first();
+        if($data->fo_status == 1){
+            $change = 2;
+        }else{
+            $change = 1;
+        }
+        DB::connection('mysql')->table('food_order')->where('fo_id', $parm_id)->update(
+            ['fo_status' => $change]
+        );
+        return back()->with("change","แก้ไขรายการ REF : ".$id." สำเร็จ");
+    }
+
+    function report(Request $request)
+    {
+        $order = DB::connection('mysql')->table('food_order')
+                ->leftJoin('order_food', 'order_food.food_id', '=', 'food_order.order_id')
+                ->leftJoin('food_list', 'food_list.fl_id', '=', 'food_order.fo_list')
+                ->leftJoin('food_type', 'food_type.ft_id', '=', 'food_order.fo_type')
+                ->leftJoin('food_status', 'food_status.fs_id', '=', 'food_order.fo_status')
+                ->where('fo_date','like' , '%'.$request->get('date_ref').'%')
+                ->where('fo_status', 1)
+                ->get();
+        $rdate = $request->get('date_ref');
+        return view('food.report', ['order'=>$order,'rdate'=>$rdate]);
     }
 
 }

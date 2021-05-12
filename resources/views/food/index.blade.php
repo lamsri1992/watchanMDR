@@ -26,7 +26,8 @@
                                 <h2>รายการสั่งอาหารผู้ป่วยทั้งหมด</h2>
                             </div>
                             <div class="col-6 text-right">
-                                <a href="/foodOrder/createFoodOrder" class="btn btn-danger"><i class="fa fa-plus-circle"></i> สร้างรายการใหม่</a>
+                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#report"><i class="fa fa-print"></i> พิมพ์รายการอาหาร</a>
+                                <a href="/foodOrder/createFoodOrder" class="btn btn-danger"><i class="fa fa-plus-circle"></i> สร้างรายการใหม่</a>  
                             </div>
                         </div>
                         <table id="foodList" class="display nowrap table responsive" width="100%">
@@ -66,6 +67,28 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ url('/foodOrder/report') }}" method="POST">
+            {{ csrf_field() }}
+            {{ method_field('POST') }}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportLabel"><i class="fa fa-print"></i> พิมพ์รายการอาหาร</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="date_ref" class="form-control jsDate" placeholder="เลือกวันที่" style="width: 100%;" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> พิมพ์รายการ</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -91,6 +114,15 @@
                 sLengthMenu: '<small>แสดง _MENU_ รายการ</small>',
                 sInfoEmpty: '<small>ไม่มีข้อมูล</small>'
             }
+        });
+    });
+
+    $(function() {
+        $.datetimepicker.setLocale('th');
+        $(".jsDate").datetimepicker({
+            format: 'Y-m-d',
+            timepicker: false,
+            lang: 'th',
         });
     });
 </script>

@@ -13,6 +13,12 @@
                 <span><i class="fa fa-check-circle"></i> {{ $message }}</span>
             </div>
             @endif
+            @if ($message = Session::get('change'))
+            <div id="alert" class="alert alert-warning alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                <span><i class="fa fa-check-circle"></i> {{ $message }}</span>
+            </div>
+            @endif
             <div class="card">
                 <div class="card-header bg-transparent">
                     <div class="row align-items-center">
@@ -77,12 +83,12 @@
                                         <tr>
                                             <td class="text-center">{{ base64_encode($od->fo_id) }}</td>
                                             <td>{{ $od->ft_name }}</td>
-                                            <td>{{ $od->fl_name }}</td>
+                                            <td>{{ $od->fl_name." ".$od->fo_note }}</td>
                                             <td>{{ DateTimeThai($od->fo_date) }}</td>
                                             <td class="text-center">
-                                                <span class="badge badge-{{ $od->fs_text }} btn-block">
+                                                <a href="{{ route('food.change',base64_encode($od->fo_id)) }}" class="badge badge-{{ $od->fs_text }} btn-block">
                                                     <i class="{{ $od->fs_icon }}"></i> {{ $od->fs_name }}
-                                                </span>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -134,9 +140,9 @@
                                         <div class="form-check">
                                             <select id="food_list" name="food_list" class="js-single">
                                                 <option value="">เลือกรายการอาหาร</option>
-                                                <option value="2">ลดไขมัน</option>
-                                                <option value="3">ลดเค็ม</option>
-                                                <option value="4">เบาหวาน</option>
+                                                <option value="1">ลดไขมัน</option>
+                                                <option value="2">ลดเค็ม</option>
+                                                <option value="3">เบาหวาน</option>
                                             </select>
                                         </div>
                                     </div>

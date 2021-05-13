@@ -53,7 +53,7 @@
                                 <tr>
                                     <th class="text-center">WCC23736{{ str_pad($order->track_id, 4, '0', STR_PAD_LEFT) }}</th>
                                     <td class="text-center"><span class="badge badge-success btn-block" style="font-size: 14px;">{{ $order->track_case }} เคส</span></td>
-                                    <td class="text-center">{{ $order->create_at }}</td>
+                                    <td class="text-center">{{ DateTimeThai($order->create_at) }}</td>
                                     <td class="text-center {{ $order->t_stat_color }}">@php echo $order->t_stat_text @endphp</td>
                                     <td class="text-center">{{ $order->point_name }}</td>
                                     <td class="text-center">

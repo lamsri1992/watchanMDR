@@ -30,38 +30,40 @@
                 </div>
                 <div class="card-body">
                     <article class="card">
-                        <div class="card-body row">
-                            <div class="col-3">
-                                <div class="text-center">
-                                    <strong><i class="far fa-folder-open"></i> TRACK_ID : </strong>
-                                    <span class="btn btn-light btn-sm">
-                                        WCC23736{{ str_pad($order->track_id, 4, '0', STR_PAD_LEFT) }}
-                                    </span>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="text-center">
+                                        <strong><i class="far fa-folder-open"></i> TRACK_ID : </strong>
+                                        <span class="btn btn-light btn-sm">
+                                            WCC23736{{ str_pad($order->track_id, 4, '0', STR_PAD_LEFT) }}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="text-center">
-                                    <strong><i class="fas fa-list-ol"></i> CASE : </strong>
-                                    <span class="btn btn-danger btn-sm">
-                                        จำนวน : {{ $order->track_case }} เคส
-                                    </span>
+                                <div class="col-3">
+                                    <div class="text-center">
+                                        <strong><i class="fas fa-list-ol"></i> CASE : </strong>
+                                        <span class="btn btn-danger btn-sm">
+                                            จำนวน : {{ $order->track_case }} เคส
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="text-left">
-                                    <strong class="badge badge-success"><i class="far fa-calendar-plus"></i> CREATE :</strong>
-                                    <span>{{ $order->create_at }}</span>
+                                <div class="col-3">
+                                    <div class="text-left">
+                                        <strong class="badge badge-success"><i class="far fa-calendar-plus"></i> CREATE :</strong>
+                                        <span>{{ DateTimeThai($order->create_at) }}</span>
+                                    </div>
+                                    <div class="text-left">
+                                        <strong class="badge badge-warning"><i class="far fa-calendar-check"></i> UPDATE :</strong>
+                                        <span>{{ DateTimeThai($order->update_at) }}</span>
+                                    </div>
                                 </div>
-                                <div class="text-left">
-                                    <strong class="badge badge-warning"><i class="far fa-calendar-check"></i> UPDATE :</strong>
-                                    <span>{{ $order->update_at }}</span>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="text-center">
-                                    <span class="{{ $order->t_stat_color }}">
-                                        @php echo $order->t_stat_text @endphp
-                                    </span>
+                                <div class="col-3">
+                                    <div class="text-center">
+                                        <span class="{{ $order->t_stat_color }}">
+                                            @php echo $order->t_stat_text @endphp
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

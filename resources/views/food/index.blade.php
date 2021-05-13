@@ -3,6 +3,12 @@
 
 <div class="header bg-gradient-primary pb-8 pt-5"></div>
 <div class="container-fluid mt--7">
+    @if ($message = Session::get('discharge'))
+    <div id="alert" class="alert alert-danger alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>	
+        <span><i class="fa fa-check-circle"></i> {{ $message }}</span>
+    </div>
+    @endif
     <div class="row">
         <div class="col-xl-12 mb-5 mb-xl-0">
             <div class="card">
@@ -30,7 +36,7 @@
                                 <a href="/foodOrder/createFoodOrder" class="btn btn-danger"><i class="fa fa-plus-circle"></i> สร้างรายการใหม่</a>  
                             </div>
                         </div>
-                        <table id="foodList" class="display nowrap table responsive" width="100%">
+                        <table id="foodList" class="table table-striped" width="100%">
                             <thead class="thead-dark">
                                 <tr>
                                     <th class="text-center">ID</th>
@@ -50,11 +56,37 @@
                                     <td class="text-center">{{ $list->food_hn }}</td>
                                     <td>{{ $list->food_patient }}</td>
                                     <td>{{ $list->food_bed }}</td>
-                                    <td>{{ $list->create_at }}</td>
+                                    <td>{{ DateTimeThai($list->create_at) }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('food.show',base64_encode($list->food_id)) }}" class="btn btn-info btn-sm btn-block">
-                                            <i class="fa fa-search"></i> รายละเอียด
-                                        </a>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form action="{{ route('food.discharge',base64_encode($list->food_id)) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('POST') }}
+                                                    <button type="button" class="btn btn-danger btn-sm btn-block" 
+                                                        onclick=
+                                                        "Swal.fire({
+                                                            title: 'Discharge : FOD23736{{ str_pad($list->food_id, 4, '0', STR_PAD_LEFT) }} ?',
+                                                            text: '{{ 'VN:'.$list->food_vn.' '.$list->food_patient }}',
+                                                            showCancelButton: true,
+                                                            confirmButtonText: `Discharge`,
+                                                            cancelButtonText: `ยกเลิก`,
+                                                        }).then((result) => {
+                                                            if (result.isConfirmed) {
+                                                                form.submit();
+                                                            } else if (result.isDenied) {
+                                                                form.reset();
+                                                            }
+                                                        })"><i class="fa fa-times-circle"></i> Discharge
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="{{ route('food.show',base64_encode($list->food_id)) }}" class="btn btn-info btn-sm btn-block">
+                                                    <i class="fa fa-search"></i> รายละเอียด
+                                                </a>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -123,6 +155,12 @@
             format: 'Y-m-d',
             timepicker: false,
             lang: 'th',
+        });
+    });
+
+    $(document).ready(function () {
+        $("#alert").fadeTo(5000, 500).slideUp(500, function () {
+            $("#alert").slideUp(500);
         });
     });
 </script>

@@ -105,4 +105,17 @@ class foodOrderController extends Controller
         return view('food.report', ['order'=>$order,'rdate'=>$rdate]);
     }
 
+    function discharge($id)
+    {
+        $parm_id = base64_decode($id);
+        $update = date("Y-m-d H:i:s");
+        DB::connection('mysql')->table('order_food')->where('food_id', $parm_id)->update(
+            [
+                'food_status' => 1,
+                'update_at' => $update
+            ]
+        );
+        return back()->with("discharge","Discharge : FOD23736".str_pad($parm_id, 4, '0', STR_PAD_LEFT)." แล้ว");
+    }
+
 }

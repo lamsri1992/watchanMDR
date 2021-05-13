@@ -46,6 +46,7 @@ Route::group(['prefix' => 'foodOrder'], function () {
     Route::post('/report','foodOrderController@report')->name('food.report');
 	Route::get('/{id}','foodOrderController@show')->name('food.show');
 	Route::get('/change/{id}','foodOrderController@change')->name('food.change');
+	Route::post('/discharge/{id}','foodOrderController@discharge')->name('food.discharge');
 });
 
 Route::group(['prefix' => 'search'], function () {

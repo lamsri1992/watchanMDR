@@ -63,7 +63,7 @@
                                                 <form action="{{ route('food.discharge',base64_encode($list->food_id)) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('POST') }}
-                                                    <button type="button" class="btn btn-danger btn-sm btn-block" 
+                                                    <button type="button" class="btn btn-danger btn-sm" 
                                                         onclick=
                                                         "Swal.fire({
                                                             title: 'Discharge : FOD23736{{ str_pad($list->food_id, 4, '0', STR_PAD_LEFT) }} ?',
@@ -82,7 +82,7 @@
                                                 </form>
                                             </div>
                                             <div class="col-md-6">
-                                                <a href="{{ route('food.show',base64_encode($list->food_id)) }}" class="btn btn-info btn-sm btn-block">
+                                                <a href="{{ route('food.show',base64_encode($list->food_id)) }}" class="btn btn-info btn-sm">
                                                     <i class="fa fa-search"></i> รายละเอียด
                                                 </a>
                                             </div>

@@ -53,11 +53,11 @@
                                 <tr>
                                     <th class="">
                                         FOD23736{{ str_pad($list->food_id, 4, '0', STR_PAD_LEFT) }}
-                                        @if (empty($list->fo_id))
+                                        {{-- @if (empty($list->fo_id))
                                         <span class="badge badge-danger">
                                             No Order
                                         </span>
-                                        @endif
+                                        @endif --}}
                                     </th>
                                     <td class="">{{ $list->food_vn }}</td>
                                     <td class="">{{ $list->food_hn }}</td>

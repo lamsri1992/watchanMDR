@@ -10,7 +10,7 @@ class foodOrderController extends Controller
     public function index()
     {
         $data = DB::connection('mysql')->table('order_food')
-                ->leftJoin('food_order', 'food_order.order_id', '=', 'order_food.food_id')
+                // ->leftJoin('food_order', 'food_order.order_id', '=', 'order_food.food_id')
                 ->where('food_status', '=' , NULL)
                 ->get();
         return view('food.index', ['data'=>$data]);

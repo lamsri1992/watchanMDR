@@ -93,7 +93,7 @@
                             class="nav-link-text">{{ __('ระบบงานเวชระเบียน') }}
                         </span>
                     </a>
-                    <div class="collapse {{ (request()->is('tracking','store')) ? 'show' : '' }} {{ (request()->is('tracking/*')) ? 'show' : '' }}"
+                    <div class="collapse {{ (request()->is('tracking','store')) ? 'show' : '' }} {{ (request()->is('tracking/*','store/*')) ? 'show' : '' }}"
                         id="navbar-office">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">

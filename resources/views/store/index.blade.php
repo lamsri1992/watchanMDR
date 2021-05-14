@@ -31,6 +31,8 @@
                     </div>
                     <div class="card-body">
                         <div class="">
+                            <h2><i class="fa fa-database text-warning"></i> คลังเวชระเบียนผู้ป่วยในทั้งหมด</h2>
+                            <small class="text-muted">เวชระเบียนเรียงลำดับจาก VN น้อยไปมาก และเรียงจากสถานะที่เสร็จสิ้น</small>
                             <table id="mdrList" class="table table-striped table-borderless table-sm">
                                 <thead class="thead-dark">
                                     <tr>
@@ -69,17 +71,18 @@
                                                         <i class="fa fa-bars"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <h6 class="dropdown-header text-muted">{{ "VN ".$md->list_vn }}</h6>
-                                                        <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list text-primary"></i> รายละเอียด</a>
-                                                        <a class="dropdown-item" href="#"><i class="fas fa-file-alt text-warning"></i> ยืมเวชระเบียน</a>
-                                                        @if (empty($md->list_path) && $md->list_status == 2)
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-file-upload text-danger"></i> อัพโหลดไฟล์ &nbsp;
+                                                        <h6 class="dropdown-header text-muted">
+                                                            {{ "VN ".$md->list_vn }}
+                                                            @if (empty($md->list_path) && $md->list_status == 2)
                                                             <small class="badge badge-danger">
                                                                 * ไม่มีไฟล์ *
                                                             </small>
+                                                            @endif
+                                                        </h6>
+                                                        <a class="dropdown-item" href="{{ route('store.show',$md->list_vn) }}">
+                                                            <i class="fas fa-clipboard-list text-primary"></i> รายละเอียด
                                                         </a>
-                                                        @endif
+                                                        <a class="dropdown-item" href="#"><i class="fas fa-file-alt text-warning"></i> ยืมเวชระเบียน</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -107,9 +110,9 @@
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
-                // order: [
-                //     [0, 'desc']
-                // ],
+                order: [
+                    [ 6, 'desc' ],[ 0, 'asc' ]
+                ],
                 oLanguage: {
                     oPaginate: {
                         sFirst: '<small>หน้าแรก</small>',
@@ -117,7 +120,7 @@
                         sNext: '<small>ถัดไป</small>',
                         sPrevious: '<small>กลับ</small>'
                     },
-                    sSearch: '<small>ค้นหา</small>',
+                    sSearch: '<small>ค้นหา : </small>',
                     sInfo: '<small>ทั้งหมด _TOTAL_ รายการ</small>',
                     sLengthMenu: '<small>แสดง _MENU_ รายการ</small>',
                     sInfoEmpty: '<small>ไม่มีข้อมูล</small>'

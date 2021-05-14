@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="container-fluid">
+                    <div class="">
                         <div class="row" style="margin-bottom: 1rem;">
                             <div class="col-6">
                                 <h2>รายการสั่งอาหารผู้ป่วยทั้งหมด</h2>

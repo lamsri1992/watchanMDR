@@ -66,7 +66,8 @@ Route::group(['prefix' => 'token'], function () {
 });
 
 Route::group(['prefix' => 'store'], function () {
-	Route::get('/', function () { return view('store.index'); });
+	// Route::get('/', function () { return view('store.index'); });
+	Route::get('/','storeController@index')->name('store.index');
 });
 
 Auth::routes();

@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="container-fluid">
+                    <div class="">
                         <div class="row" style="margin-bottom: 1rem;">
                             <div class="col-6">
                                 <h2>รายการเวชระเบียนผู้ป่วยในทั้งหมด</h2>

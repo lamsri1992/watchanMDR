@@ -46,6 +46,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach($data as $md)
+                                    @if ($md->list_status == 1)
+                                        @php $bt = "disabled"; @endphp
+                                    @else
+                                        @php $bt = ""; @endphp
+                                    @endif
                                         <tr>
                                             <th class="text-center">{{ $md->list_vn }}</th>
                                             <td class="text-center">{{ $md->list_hn }}</td>
@@ -60,13 +65,21 @@
                                                 <div class="btn-group dropleft">
                                                     <button type="button" class="btn btn-success btn-sm dropdown-toggle"
                                                         data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
+                                                        aria-expanded="false" {{ $bt }}>
                                                         <i class="fa fa-bars"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <h6 class="dropdown-header text-muted">{{ "VN ".$md->list_vn }}</h6>
-                                                        <a class="dropdown-item" href="#">รายละเอียด</a>
-                                                        <a class="dropdown-item" href="#">ยืมเวชระเบียน</a>
+                                                        <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list text-primary"></i> รายละเอียด</a>
+                                                        <a class="dropdown-item" href="#"><i class="fas fa-file-alt text-warning"></i> ยืมเวชระเบียน</a>
+                                                        @if (empty($md->list_path) && $md->list_status == 2)
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#"><i class="fa fa-file-upload text-danger"></i> อัพโหลดไฟล์ &nbsp;
+                                                            <small class="badge badge-danger">
+                                                                * ไม่มีไฟล์ *
+                                                            </small>
+                                                        </a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>

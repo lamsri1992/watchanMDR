@@ -19,6 +19,12 @@
                 <span><i class="fa fa-check-circle"></i> {{ $message }}</span>
             </div>
             @endif
+            @if ($message = Session::get('bed'))
+            <div id="alert" class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                <span><i class="fa fa-check-circle"></i> {{ $message }}</span>
+            </div>
+            @endif
             <div class="card">
                 <div class="card-header bg-transparent">
                     <div class="row align-items-center">
@@ -57,29 +63,39 @@
                                     </tr>
                                     <tr>
                                         <th class="text-center"><i class="fa fa-bed"></i> เตียง/ห้อง</th>
-                                        <td>{{ $list->food_bed }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    {{ $list->food_bed }}
+                                                </div>
+                                                <div class="col-6">
+                                                    <a href="#" class="badge badge-info" data-toggle="modal" data-target="#bed">
+                                                        <i class="fa fa-info-circle"></i> 
+                                                        เปลี่ยนเตียง/ห้อง
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th class="text-center"><i class="fa fa-calendar-plus"></i> วันที่สร้าง</th>
                                         <td>{{ DateTimeThai($list->create_at) }}</td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" class="text-center">
-                                            <a href="#" class="badge badge-danger"><i class="fa fa-times-circle"></i> Discharge</a>
-                                        </td>
-                                    </tr>
                                 </table>
                             </div>
                             <div class="col-md-8">
-                                <table class="table table-striped table-borderless table-sm">
-                                    <tr>
-                                        <th class="text-center">REF</th>
-                                        <th>ประเภทอาหาร</th>
-                                        <th>รายการอาหาร</th>
-                                        <th>วันที่สั่งรายการ</th>
-                                        <th class="text-center">สถานะ</th>
-                                    </tr>
+                                <table id="foodList" class="table display table-sm" style="width: 100%;">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th class="text-center">REF</th>
+                                            <th>ประเภทอาหาร</th>
+                                            <th>รายการอาหาร</th>
+                                            <th>วันที่สั่งรายการ</th>
+                                            <th class="text-center">สถานะ</th>
+                                        </tr>
+                                    </thead>
                                     @foreach ($order as $od)
+                                    <tbody>
                                         <tr>
                                             <td class="text-center">{{ base64_encode($od->fo_id) }}</td>
                                             <td>{{ $od->ft_name }}</td>
@@ -91,6 +107,7 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                    </tbody>
                                     @endforeach
                                 </table>
                             </div>
@@ -179,6 +196,54 @@
     </div>
 </div>
 
+<!-- Modal Bed -->
+<div class="modal fade" id="bed" aria-labelledby="bedLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bedLabel"><i class="fa fa-bed"></i> เปลี่ยนเตียง/ห้อง : {{ $list->food_patient }}</h5>
+            </div>
+            <form action="{{ url('/foodOrder/bed') }}" method="POST">
+                {{ csrf_field() }}
+                {{ method_field('POST') }}
+                <input type="hidden" name="food_id" value="{{ $list->food_id }}">
+                <input type="hidden" name="patient" value="{{ $list->food_patient }}">
+                <div class="modal-body">
+                    <div class="form-check">
+                        <select id="bed" name="bed" class="js-single">
+                            @foreach ($bed as $beds)
+                            <option value="{{ $beds->bed_number }}"
+                                @php if ($list->food_bed == $beds->bed_number){ echo 'SELECTED'; } @endphp>
+                                {{ $beds->bed_number }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">ปิดหน้าต่าง</button>
+                    <button type="button" class="btn btn-success btn-sm" 
+                        onclick=
+                        "Swal.fire({
+                            title: 'เปลี่ยนเตียง/ห้องผู้ป่วย ?',
+                            text: '{{ 'VN:'.$list->food_vn.' '.$list->food_patient }}',
+                            showCancelButton: true,
+                            confirmButtonText: `ยืนยัน`,
+                            cancelButtonText: `ยกเลิก`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            } else if (result.isDenied) {
+                                form.reset();
+                            }
+                        })"><i class="fa fa-check-circle"></i> เปลี่ยนเตียง/ห้อง
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+      
 @endsection
 @section('script')
 <script>
@@ -207,6 +272,32 @@
             document.getElementById("note").disabled = false;
         }
     }
+
+    $(document).ready(function () {
+        $('#foodList').dataTable({
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            paging: false,
+            ordering: false,
+            info: false,
+            searching: false,
+            scrollX: true,
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<small>หน้าแรก</small>',
+                    sLast: '<small>หน้าสุดท้าย</small>',
+                    sNext: '<small>ถัดไป</small>',
+                    sPrevious: '<small>กลับ</small>'
+                },
+                sSearch: '<small>ค้นหา</small>',
+                sInfo: '<small>ทั้งหมด _TOTAL_ รายการ</small>',
+                sLengthMenu: '<small>แสดง _MENU_ รายการ</small>',
+                sInfoEmpty: '<small>ไม่มีข้อมูล</small>'
+            },
+        });
+    });
    
 </script>
 @endsection

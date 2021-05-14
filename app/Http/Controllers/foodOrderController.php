@@ -10,6 +10,7 @@ class foodOrderController extends Controller
     public function index()
     {
         $data = DB::connection('mysql')->table('order_food')
+                ->leftJoin('food_order', 'food_order.order_id', '=', 'order_food.food_id')
                 ->where('food_status', '=' , NULL)
                 ->get();
         return view('food.index', ['data'=>$data]);
@@ -50,7 +51,11 @@ class foodOrderController extends Controller
                 ->leftJoin('food_status', 'food_status.fs_id', '=', 'food_order.fo_status')
                 ->where('order_id', $parm_id)
                 ->get();
-        return view('food.show', ['list'=>$list,'order'=>$order]);
+        $bed = DB::connection('pgsql')->table('b_visit_bed')
+                ->select('bed_number')
+                ->where('active', 1)
+                ->get();
+        return view('food.show', ['list'=>$list,'order'=>$order,'bed'=>$bed]);
     }
 
     function addOrder(Request $request)
@@ -89,6 +94,21 @@ class foodOrderController extends Controller
             ['fo_status' => $change]
         );
         return back()->with("change","แก้ไขรายการ REF : ".$id." สำเร็จ");
+    }
+
+    function bed(Request $request)
+    {
+        $id = $request->get('food_id');
+        $bed = $request->get('bed');
+        $patient = $request->get('patient');
+        $update = date("Y-m-d H:i:s");
+        DB::connection('mysql')->table('order_food')->where('food_id', $id)->update(
+            [
+                'food_bed' => $bed,
+                'update_at' => $update
+            ]
+        );
+        return back()->with("bed","เปลี่ยนเตียง/ห้อง : ".$patient." > > > ".$bed."");
     }
 
     function report(Request $request)

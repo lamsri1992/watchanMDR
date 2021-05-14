@@ -36,12 +36,12 @@
                                 <a href="/foodOrder/createFoodOrder" class="btn btn-danger"><i class="fa fa-plus-circle"></i> สร้างรายการใหม่</a>  
                             </div>
                         </div>
-                        <table id="foodList" class="table table-striped" width="100%">
+                        <table id="foodList" class="table table-striped responsive nowrap" width="100%">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th class="text-center">ID</th>
-                                    <th class="text-center">หมายเลข VN</th>
-                                    <th class="text-center">หมายเลข HN</th>
+                                    <th class="">ID</th>
+                                    <th class="">หมายเลข VN</th>
+                                    <th class="">หมายเลข HN</th>
                                     <th><i class="far fa-id-card"></i> ผู้ป่วย</th>
                                     <th><i class="fa fa-bed"></i> เตียง/ห้อง</th>
                                     <th><i class="far fa-calendar-plus"></i> วันที่สร้าง</th>
@@ -51,19 +51,30 @@
                             <tbody>
                                 @foreach ($data as $list)
                                 <tr>
-                                    <th class="text-center">FOD23736{{ str_pad($list->food_id, 4, '0', STR_PAD_LEFT) }}</th>
-                                    <td class="text-center">{{ $list->food_vn }}</td>
-                                    <td class="text-center">{{ $list->food_hn }}</td>
+                                    <th class="">
+                                        FOD23736{{ str_pad($list->food_id, 4, '0', STR_PAD_LEFT) }}
+                                        @if (empty($list->fo_id))
+                                        <span class="badge badge-danger">
+                                            No Order
+                                        </span>
+                                        @endif
+                                    </th>
+                                    <td class="">{{ $list->food_vn }}</td>
+                                    <td class="">{{ $list->food_hn }}</td>
                                     <td>{{ $list->food_patient }}</td>
                                     <td>{{ $list->food_bed }}</td>
                                     <td>{{ DateTimeThai($list->create_at) }}</td>
                                     <td class="text-center">
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                        <div class="dropdown dropleft">
+                                            <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="foodMenu"
+                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <i class="fa fa-bars"></i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="foodMenu">
                                                 <form action="{{ route('food.discharge',base64_encode($list->food_id)) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('POST') }}
-                                                    <button type="button" class="btn btn-danger btn-sm" 
+                                                    <button href="#" type="button" class="dropdown-item" 
                                                         onclick=
                                                         "Swal.fire({
                                                             title: 'Discharge : FOD23736{{ str_pad($list->food_id, 4, '0', STR_PAD_LEFT) }} ?',
@@ -77,13 +88,11 @@
                                                             } else if (result.isDenied) {
                                                                 form.reset();
                                                             }
-                                                        })"><i class="fa fa-times-circle"></i> Discharge
+                                                        })"><i class="fa fa-times-circle text-danger"></i> Discharge
                                                     </button>
                                                 </form>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <a href="{{ route('food.show',base64_encode($list->food_id)) }}" class="btn btn-info btn-sm">
-                                                    <i class="fa fa-search"></i> รายละเอียด
+                                                <a href="{{ route('food.show',base64_encode($list->food_id)) }}" class="dropdown-item">
+                                                    <i class="fa fa-search text-success"></i> รายละเอียด
                                                 </a>
                                             </div>
                                         </div>
@@ -133,7 +142,7 @@
             order: [
                 [0, 'desc']
             ],
-            scrollX: true,
+            // scrollX: true,
             oLanguage: {
                 oPaginate: {
                     sFirst: '<small>หน้าแรก</small>',

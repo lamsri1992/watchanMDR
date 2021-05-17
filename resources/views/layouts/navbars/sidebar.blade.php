@@ -8,7 +8,7 @@
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
             <img src="{{ asset('argon') }}/img/brand/logo.png" class="navbar-brand-img"
-                alt="WATCHAN ERP"> WATCHAN :: MDR
+                alt="WATCHAN ERP"> WATCHAN 4.0
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -70,20 +70,54 @@
                     </a>
                 </li>
             </ul>
-            <h6 class="navbar-heading text-muted">เมนูระบบ</h6>
+            <h6 class="navbar-heading text-muted">เมนูระบบแยกตามกลุ่มงาน</h6>
             <!-- Navigation -->
             <ul class="navbar-nav">
-                {{-- <li
-                    class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }} {{ (request()->is('drugOrder/createDrugOrder')) ? 'active' : '' }}">
-                    <a class="nav-link" href="/drugOrder">
-                        <i class="fas fa-notes-medical text-danger"></i> ระบบออเดอร์ผู้ป่วย
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-ipd" data-toggle="collapse" role="button" aria-expanded="false"
+                        aria-controls="navbar-ipd">
+                        <i class="fas fa-bed text-warning"></i>
+                        <span
+                            class="nav-link-text">{{ __('งานผู้ป่วยใน') }}
+                        </span>
                     </a>
-                </li> --}}
-                <li
-                    class="nav-item {{ (request()->is('foodOrder')) ? 'active' : '' }} {{ (request()->is('foodOrder/*')) ? 'active' : '' }} {{ (request()->is('foodOrder/createFoodOrder')) ? 'active' : '' }} ">
-                    <a class="nav-link" href="/foodOrder">
-                        <i class="fas fa-utensils text-warning"></i> ระบบสั่งอาหารผู้ป่วย
+                    <div class="collapse {{ (request()->is('drugOrder','foodOrder')) ? 'show' : '' }} {{ (request()->is('drugOrder/*','foodOrder/*')) ? 'show' : '' }}"
+                        id="navbar-ipd">
+                        <ul class="nav nav-sm flex-column">
+                            <li
+                                class="nav-item {{ (request()->is('drugOrder')) ? 'active' : '' }} {{ (request()->is('drugOrder/createDrugOrder')) ? 'active' : '' }}">
+                                <a class="nav-link" href="/drugOrder">
+                                    ระบบออเดอร์ผู้ป่วย
+                                </a>
+                            </li>
+                            <li
+                                class="nav-item {{ (request()->is('foodOrder')) ? 'active' : '' }} {{ (request()->is('foodOrder/*')) ? 'active' : '' }} {{ (request()->is('foodOrder/createFoodOrder')) ? 'active' : '' }} ">
+                                <a class="nav-link" href="/foodOrder">
+                                    ระบบสั่งอาหารผู้ป่วย
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-er" data-toggle="collapse" role="button" aria-expanded="false"
+                        aria-controls="navbar-er">
+                        <i class="fas fa-ambulance text-danger"></i>
+                        <span
+                            class="nav-link-text">{{ __('งานอุบัติเหตุ/ฉุกเฉิน') }}
+                        </span>
                     </a>
+                    <div class="collapse {{ (request()->is('er')) ? 'show' : '' }} {{ (request()->is('er/*')) ? 'show' : '' }}"
+                        id="navbar-er">
+                        <ul class="nav nav-sm flex-column">
+                            <li
+                                class="nav-item {{ (request()->is('ems')) ? 'active' : '' }} {{ (request()->is('er/*')) ? 'active' : '' }}">
+                                <a class="nav-link" href="/er/ems">
+                                    รายงานข้อมูล EMS
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#navbar-office" data-toggle="collapse" role="button" aria-expanded="false"
@@ -118,22 +152,22 @@
                 </li>
             </ul>
             @if(Auth::user()->permission_id == 1)
-            <hr class="my-3">
-            <h6 class="navbar-heading text-muted">เมนูผู้ดูแลระบบ</h6>
-            <ul class="navbar-nav mb-md-3">
-                <li
-                    class="nav-item {{ (request()->is('users')) ? 'active' : '' }}">
-                    <a class="nav-link" href="/users">
-                        <i class="fas fa-users text-info"></i> ระบบจัดการผู้ใช้งาน
-                    </a>
-                </li>
-                <li
-                class="nav-item {{ (request()->is('token')) ? 'active' : '' }}">
-                <a class="nav-link" href="/token">
-                    <i class="fab fa-line text-success"></i> กำหนด Line Token
-                </a>
-            </li>
-            </ul>
+                <hr class="my-3">
+                <h6 class="navbar-heading text-muted">เมนูผู้ดูแลระบบ</h6>
+                <ul class="navbar-nav mb-md-3">
+                    <li
+                        class="nav-item {{ (request()->is('users')) ? 'active' : '' }}">
+                        <a class="nav-link" href="/users">
+                            <i class="fas fa-users text-info"></i> ระบบจัดการผู้ใช้งาน
+                        </a>
+                    </li>
+                    <li
+                        class="nav-item {{ (request()->is('token')) ? 'active' : '' }}">
+                        <a class="nav-link" href="/token">
+                            <i class="fab fa-line text-success"></i> กำหนด Line Token
+                        </a>
+                    </li>
+                </ul>
             @endif
             <h6 class="navbar-heading text-muted">คู่มือการใช้งาน</h6>
             <ul class="navbar-nav mb-md-3">

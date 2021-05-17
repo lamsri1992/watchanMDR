@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ 'MDR :: WATCHAN HOSPITAL' }}</title>
+    <title>{{ 'WATCHAN HOSPITAL : MIS 4.0' }}</title>
     <link href="{{ asset('argon') }}/img/brand/logo.png" rel="icon" type="image/png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">

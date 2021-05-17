@@ -3,9 +3,14 @@
     <div class="container-fluid">
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-            href="{{ route('home') }}">{{ __('WATCHAN MDR :: ระบบบริหารจัดการเวชระเบียนผู้ป่วยใน โรงพยาบาลวัดจันทร์เฉลิมพระเกียรติ ๘๐ พรรษา') }}</a>
+            href="{{ route('home') }}">WATCHAN Management Information System <br>
+            <small class="text-muted">
+                ระบบสารสนเทศเพื่อการบริหาร โรงพยาบาลวัดจันทร์เฉลิมพระเกียรติ ๘๐ พรรษา
+            </small>
+        </a>
         <!-- User -->
-        <form action="{{ url('/search') }}" method="POST" class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+        <form action="{{ url('/search') }}" method="POST"
+            class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             {{ csrf_field() }}
             {{ method_field('POST') }}
             <div class="form-group mb-0">

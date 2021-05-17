@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+<div class="header pb-6 pt-5 pt-lg-7 d-flex align-items-center"
     style="background-image: url(https://new.watchanhospital.com/assets/img/hospital_front.jpg); 
     background-size: cover; background-position: bottom;">
 
@@ -15,8 +15,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-muted mb-0">จำนวนเตียง</h5>
-                                    <span class="h2 font-weight-bold mb-0">10</span>
+                                    <h5 class="card-title text-muted mb-0">จำนวนผู้ป่วยนอก</h5>
+                                    <span class="h2 font-weight-bold mb-0">10 <small class="text-muted">ราย</small></span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -24,9 +24,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-3 mb-0 text-muted text-sm">
-                                <span class="text-nowrap">โรงพยาบาลชุมชน ขนาด F3</span>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -38,20 +35,16 @@
                                     <h5 class="card-title text-muted mb-0">จำนวนผู้ป่วยใน</h5>
                                     <span class="h2 font-weight-bold mb-0">
                                         @foreach ($num as $admit)
-                                            {{ $admit->admit_num }}
+                                            {{ $admit->admit_num }} <small class="text-muted">ราย</small>
                                         @endforeach
                                     </span>
                                 </div>
                                 <div class="col-auto">
-                                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
                                         <i class="fas fa-bed"></i>
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-3 mb-0 text-muted text-sm">
-                                <span class="text-danger mr-2"><i class="fas fa-arrow-up"></i> admit 3 ราย</span>
-                                <span class="text-success mr-2"><i class="fas fa-arrow-down"></i> discharge 2 ราย</span>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -60,18 +53,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-muted mb-0">จำนวนวันนอน</h5>
-                                    <span class="h2 font-weight-bold mb-0">12</span>
+                                    <h5 class="card-title text-muted mb-0">ผู้ป่วยอุบัติเหตุ/ฉุกเฉิน</h5>
+                                    <span class="h2 font-weight-bold mb-0">0 <small class="text-muted">ราย</small></span>
                                 </div>
                                 <div class="col-auto">
-                                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                                        <i class="fas fa-chart-line"></i>
+                                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                        <i class="fas fa-user-injured"></i>
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-3 mb-0 text-muted text-sm">
-                                <span class="text-nowrap">อัพเดตล่าสุด</span>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -80,8 +70,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-muted mb-0">จำนวนการส่งต่อ/ครั้ง</h5>
-                                    <span class="h2 font-weight-bold mb-0">0</span>
+                                    <h5 class="card-title text-muted mb-0">จำนวนการส่งต่อ Refer</h5>
+                                    <span class="h2 font-weight-bold mb-0">0 <small class="text-muted">ครั้ง</small></span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -89,9 +79,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-3 mb-0 text-muted text-sm">
-                                <span class="text-nowrap">อัพเดตล่าสุด</span>
-                            </p>
                         </div>
                     </div>
                 </div>

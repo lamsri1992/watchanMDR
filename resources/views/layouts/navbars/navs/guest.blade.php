@@ -1,7 +1,7 @@
 <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
     <div class="container px-4">
         <a class="navbar-brand text-white" href="/">
-            <img src="{{ asset('argon') }}/img/brand/logo.png" /> MDR :: WATCHAN HOSPITAL
+            <img src="{{ asset('argon') }}/img/brand/logo.png" /> WATCHAN HOSPITAL : MIS 4.0
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -52,7 +52,9 @@ Route::group(['prefix' => 'foodOrder'], function () {
 
 Route::group(['prefix' => 'er'], function () {
 	Route::get('/ems','erController@ems')->name('er.ems');
-	Route::get('/create_ems', function () { return view('er.ems_create'); });
+	Route::get('/create_ems','erController@emsCreate')->name('er.ems_create');
+	Route::get('/record_ems','erController@record_ems')->name('er.record_ems');
+
 });
 
 Route::group(['prefix' => 'search'], function () {

@@ -4,13 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Redirect;
+use Auth;
 
 class erController extends Controller
 {
     public function ems()
     {
-        return view('er.ems');
+        $list = DB::connection('mysql')->table('ems_list')
+                ->get();
+        return view('er.ems', ['list'=>$list]);
+    }
+
+    public function emsCreate()
+    {
+        $lv = DB::connection('mysql')->table('ems_level_list')->get();
+        $tp = DB::connection('mysql')->table('ems_type_list')->get();
+        $tl = DB::connection('mysql')->table('ems_transpot_list')->get();
+        $pl = DB::connection('mysql')->table('ems_perm_list')->get();
+        $ds = DB::connection('mysql')->table('ems_disposition_list')->get();
+        return view('er.ems_create', ['lv'=>$lv,'tp'=>$tp,'tl'=>$tl,'pl'=>$pl,'ds'=>$ds]);
+    }
+
+    function record_ems(Request $request)
+    {
+        $create = date("Y-m-d H:i:s");
+        DB::connection('mysql')->table('ems_list')->insert(
+            [
+                'ems_hn' => $request->get('hn'),
+                'ems_cid' => $request->get('cid'),
+                'ems_pname' => $request->get('pname'),
+                'ems_date' => $request->get('date'),
+                'ems_time_in' => $request->get('time_in'),
+                'ems_time_find' => $request->get('time_find'),
+                'ems_no' => $request->get('no'),
+                'ems_symptom' => $request->get('symptom'),
+                'ems_level' => $request->get('level'),
+                'ems_type' => $request->get('type'),
+                'ems_transpot' => $request->get('transpot'),
+                'ems_perm' => $request->get('perm'),
+                'ems_primcare' => $request->get('primcare'),
+                'ems_diag' => $request->get('diag'),
+                'ems_disposition' => $request->get('disposition'),
+                'ems_kpi' => $request->get('kpi'),
+                'ems_create' => Auth::user()->id,
+                'create_at' => $create
+            ]
+        );
     }
 
 }

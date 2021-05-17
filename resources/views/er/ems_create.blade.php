@@ -33,104 +33,99 @@
                             </div>
                         </div>
                     </div>
-                    <form>
+                    <form id="emsRecord">
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">HN <span class="text-danger">*</span></label>
-                                <input id="hn" type="text" class="form-control" placeholder="ระบุหมายเลข HN">
+                                <input id="hn" name="hn" type="text" class="form-control" placeholder="ระบุหมายเลข HN">
                             </div>
-                            <button id="hn_find" type="button" class="btn btn-dark" hidden><i
-                                    class="fa fa-search"></i></button>
+                            <button id="hn_find" type="button" class="btn btn-dark" hidden><i class="fa fa-search"></i></button>
                             <div class="form-group col-md-4">
                                 <label for=""><i class="far fa-address-card"></i> CID</label>
-                                <input id="cid" type="text" class="form-control" placeholder="ค่าอัตโนมัติ" readonly>
+                                <input id="cid" name="cid" type="text" class="form-control" placeholder="ค่าอัตโนมัติ" readonly required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for=""><i class="fas fa-user-injured"></i> ชื่อ - สกุล</label>
-                                <input id="pname" type="text" class="form-control" placeholder="ค่าอัตโนมัติ" readonly>
+                                <input id="pname" name="pname" type="text" class="form-control" placeholder="ค่าอัตโนมัติ" readonly required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for=""><i class="far fa-calendar"></i> วันที่เกิดเหตุ</label>
-                                <input type="text" class="form-control jsDate" placeholder="เลือกวันที่">
+                                <input type="text" name="date" class="form-control jsDate" placeholder="เลือกวันที่" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for=""><i class="far fa-clock"></i> เวลารับแจ้งเหตุ</label>
-                                <input type="time" class="form-control" placeholder="">
+                                <input type="time" name="time_in" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for=""><i class="far fa-clock"></i> เวลาถึงที่เกิดเหตุ</label>
-                                <input type="time" class="form-control" placeholder="">
+                                <input type="time" name="time_find" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">เลขปฏิบัติการ</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" name="no" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for=""><i class="fas fa-info-circle"></i> อาการที่สำคัญ</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" name="symptom" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">ระดับความรุนแรง</label>
-                                <select name="" class="custom-select" required>
+                                <select name="level" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    <option value="">Resuscition</option>
-                                    <option value="">Emergency</option>
-                                    <option value="">Urgent</option>
-                                    <option value="">Semi Urgent</option>
-                                    <option value="">Non Urgent</option>
+                                    @foreach ($lv as $lvs)
+                                    <option value="{{ $lvs->level_id }}">{{ $lvs->level_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">ประเภทผู้ป่วย</label>
-                                <select name="" class="custom-select" required>
+                                <select name="type" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    <option value="">Trauma</option>
-                                    <option value="">Non Trauma</option>
+                                    @foreach ($tp as $tps)
+                                    <option value="{{ $tps->type_id }}">{{ $tps->type_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">การนำส่ง</label>
-                                <select name="" class="custom-select" required>
+                                <select name="transpot" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    <option value="">ผู้ป่วยมาเอง/ญาตินำส่ง</option>
-                                    <option value="">BLS</option>
-                                    <option value="">ALS</option>
-                                    <option value="">FR</option>
+                                    @foreach ($tl as $tls)
+                                    <option value="{{ $tls->tran_id }}">{{ $tls->tran_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">สิทธิการรักษา</label>
-                                <select name="" class="custom-select" required>
+                                <select name="perm" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    <option value="">บัตรทอง</option>
-                                    <option value="">อุบัติเหตุจราจร</option>
-                                    <option value="">ประกันสังคม</option>
-                                    <option value="">ต่างด้าว</option>
+                                    @foreach ($pl as $pls)
+                                    <option value="{{ $pls->perm_id }}">{{ $pls->perm_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="">การดูแลเบื้องต้น</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" name="primcare" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="">การวินิจฉัย</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" name="diag" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">Disposition</label>
-                                <select name="" class="custom-select" required>
+                                <select name="disposition" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    <option value="">D/C</option>
-                                    <option value="">Admit</option>
-                                    <option value="">Refer</option>
-                                    <option value="">Death</option>
+                                    @foreach ($ds as $dss)
+                                    <option value="{{ $dss->dis_id }}">{{ $dss->dis_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-9">
                                 <label for="">ประเด็นคุณภาพที่สำคัญ</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" name="kpi" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="text-right">
@@ -173,15 +168,18 @@
                         title: 'พบข้อมูล HN: '+ id,
                         text: result.patient_firstname + " " + result.patient_lastname,
                         showConfirmButton: false,
-                        timer: 3000
+                        timer: 1500
                     })
                 }else{
+                    $("#hn").val("");
+                    $("#cid").val("");
+                    $("#pname").val("");
                     Swal.fire({
                         icon: 'error',
                         title: 'ไม่พบ HN: '+id,
                         text: 'กรุณาตรวจสอบใหม่อีกครั้ง',
                         showConfirmButton: false,
-                        timer: 3000
+                        timer: 1500
                     })
                 }
             }
@@ -195,6 +193,34 @@
             timepicker: false,
             lang: 'th',
         });
+    });
+
+    $('#emsRecord').on('submit', function () {
+        event.preventDefault();
+        Swal.fire({
+            title: 'บันทึกข้อมูล EMS ?',
+            showCancelButton: true,
+            confirmButtonText: `บันทึก`,
+            cancelButtonText: `ยกเลิก`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url:"{{ route('er.record_ems') }}",
+                    data: $('#emsRecord').serialize(),
+                    success:function(data){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'บันทึกรายการ EMS สำเร็จ',
+                            showConfirmButton: false,
+                            timer: 2800
+                        })
+                        window.setTimeout(function () {
+                                location.replace('/er/ems/')
+                        }, 3000);
+                    }
+                });
+            }
+        })
     });
 
 </script>

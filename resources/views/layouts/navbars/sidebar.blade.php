@@ -76,7 +76,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#navbar-ipd" data-toggle="collapse" role="button" aria-expanded="false"
                         aria-controls="navbar-ipd">
-                        <i class="fas fa-bed text-warning"></i>
+                        <i class="fas fa-bed text-info"></i>
                         <span
                             class="nav-link-text">{{ __('งานผู้ป่วยใน') }}
                         </span>

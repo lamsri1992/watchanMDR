@@ -104,7 +104,7 @@
                         aria-controls="navbar-er">
                         <i class="fas fa-ambulance text-danger"></i>
                         <span
-                            class="nav-link-text">{{ __('งานอุบัติเหตุ/ฉุกเฉิน') }}
+                            class="nav-link-text">{{ __('งานอุบัติเหตุและฉุกเฉิน') }}
                         </span>
                     </a>
                     <div class="collapse {{ (request()->is('er')) ? 'show' : '' }} {{ (request()->is('er/*')) ? 'show' : '' }}"

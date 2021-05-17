@@ -50,6 +50,11 @@ Route::group(['prefix' => 'foodOrder'], function () {
 	Route::post('/discharge/{id}','foodOrderController@discharge')->name('food.discharge');
 });
 
+Route::group(['prefix' => 'er'], function () {
+	Route::get('/ems','erController@ems')->name('er.ems');
+	Route::get('/create_ems', function () { return view('er.ems_create'); });
+});
+
 Route::group(['prefix' => 'search'], function () {
 	Route::post('/','MdrController@search');
 });
@@ -66,7 +71,6 @@ Route::group(['prefix' => 'token'], function () {
 });
 
 Route::group(['prefix' => 'store'], function () {
-	// Route::get('/', function () { return view('store.index'); });
 	Route::get('/','storeController@index')->name('store.index');
 	Route::get('/{id}','storeController@show')->name('store.show');
 	Route::post('/upload', 'storeController@upload');

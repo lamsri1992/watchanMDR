@@ -3,7 +3,7 @@
 @if (Auth::check() == NULL)
     @php header( "location: /login" ); exit(0); @endphp
 @endif
-<div class="header bg-gradient-primary pb-8 pt-5"></div>
+<div class="header bg-gradient-default pb-8 pt-5"></div>
 <div class="container-fluid mt--7">
     <div class="alert alert-danger alert-block text-center">
         <strong style="font-size: 20px;">โปรดอ่านก่อน <i class="fa fa-exclamation-triangle"></i></strong><br>

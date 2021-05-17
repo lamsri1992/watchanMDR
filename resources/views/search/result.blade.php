@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="header bg-gradient-primary pb-8 pt-5"></div>
+<div class="header bg-gradient-default pb-8 pt-5"></div>
 <div class="container-fluid mt--7">
     <div class="row">
         <div class="col-xl-12 mb-5 mb-xl-0">

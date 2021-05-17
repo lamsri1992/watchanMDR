@@ -22,3 +22,4 @@ Route::apiResource('discharge_list', 'api\ListApiController');
 Route::apiResource('drug_list', 'api\DrugApiController');
 Route::apiResource('top10icd', 'api\DashboardApi');
 Route::apiResource('ipdadmit', 'api\DashboardApiAdmit');
+Route::apiResource('patient', 'api\patientList');

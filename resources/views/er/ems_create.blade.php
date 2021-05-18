@@ -35,24 +35,39 @@
                     </div>
                     <form id="emsRecord">
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-2">
                                 <label for="">HN <span class="text-danger">*</span></label>
                                 <input id="hn" name="hn" type="text" class="form-control" placeholder="ระบุหมายเลข HN">
                             </div>
-                            <button id="hn_find" type="button" class="btn btn-dark" hidden><i class="fa fa-search"></i></button>
+                            <div class="form-group col-md-1">
+                                <label for="">&nbsp;</label>
+                                <button id="hn_find" type="button" class="btn btn-success btn-block">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <label for="">&nbsp;</label>
+                                <button id="patient_find" type="button" class="btn btn-primary btn-block"
+                                    data-toggle="modal" data-target="#modalHistory" disabled>
+                                    <i class="fa fa-notes-medical"></i>
+                                </button>
+                            </div>
                             <div class="form-group col-md-4">
                                 <label for=""><i class="far fa-address-card"></i> CID</label>
-                                <input id="cid" name="cid" type="text" class="form-control" placeholder="ค่าอัตโนมัติ" readonly required>
+                                <input id="cid" name="cid" type="text" class="form-control" placeholder="ค่าอัตโนมัติ"
+                                    readonly required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for=""><i class="fas fa-user-injured"></i> ชื่อ - สกุล</label>
-                                <input id="pname" name="pname" type="text" class="form-control" placeholder="ค่าอัตโนมัติ" readonly required>
+                                <input id="pname" name="pname" type="text" class="form-control"
+                                    placeholder="ค่าอัตโนมัติ" readonly required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for=""><i class="far fa-calendar"></i> วันที่เกิดเหตุ</label>
-                                <input type="text" name="date" class="form-control jsDate" placeholder="เลือกวันที่" required>
+                                <input type="text" name="date" class="form-control jsDate" placeholder="เลือกวันที่"
+                                    required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for=""><i class="far fa-clock"></i> เวลารับแจ้งเหตุ</label>
@@ -74,8 +89,8 @@
                                 <label for="">ระดับความรุนแรง</label>
                                 <select name="level" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    @foreach ($lv as $lvs)
-                                    <option value="{{ $lvs->level_id }}">{{ $lvs->level_name }}</option>
+                                    @foreach($lv as $lvs)
+                                        <option value="{{ $lvs->level_id }}">{{ $lvs->level_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -83,8 +98,8 @@
                                 <label for="">ประเภทผู้ป่วย</label>
                                 <select name="type" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    @foreach ($tp as $tps)
-                                    <option value="{{ $tps->type_id }}">{{ $tps->type_name }}</option>
+                                    @foreach($tp as $tps)
+                                        <option value="{{ $tps->type_id }}">{{ $tps->type_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -92,8 +107,8 @@
                                 <label for="">การนำส่ง</label>
                                 <select name="transpot" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    @foreach ($tl as $tls)
-                                    <option value="{{ $tls->tran_id }}">{{ $tls->tran_name }}</option>
+                                    @foreach($tl as $tls)
+                                        <option value="{{ $tls->tran_id }}">{{ $tls->tran_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -101,8 +116,8 @@
                                 <label for="">สิทธิการรักษา</label>
                                 <select name="perm" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    @foreach ($pl as $pls)
-                                    <option value="{{ $pls->perm_id }}">{{ $pls->perm_name }}</option>
+                                    @foreach($pl as $pls)
+                                        <option value="{{ $pls->perm_id }}">{{ $pls->perm_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -118,8 +133,8 @@
                                 <label for="">Disposition</label>
                                 <select name="disposition" class="custom-select" required>
                                     <option value="">เลือก</option>
-                                    @foreach ($ds as $dss)
-                                    <option value="{{ $dss->dis_id }}">{{ $dss->dis_name }}</option>
+                                    @foreach($ds as $dss)
+                                        <option value="{{ $dss->dis_id }}">{{ $dss->dis_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -140,15 +155,38 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalHistory" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalHistory"><i class="fa fa-history"></i> ประวัติการ EMS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="emsHistory" class="table table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>DATE_TIME</th>
+                            <th>TRANSPOT</th>
+                            <th>LEVEL</th>
+                            <th>STATUS</th>
+                            <th><i class="fa fa-bars"></i></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('script')
 <script type="text/javascript">
     document.onkeydown = fkey;
-    document.onkeypress = fkey
-    document.onkeyup = fkey;
 
     function fkey(e) {
-
         if (e.keyCode == 13) {
             e.preventDefault();
             $('#hn_find').click();
@@ -163,25 +201,49 @@
                 if (typeof result.patient_firstname !== "undefined") {
                     $("#cid").val(result.patient_pid);
                     $("#pname").val(result.patient_firstname + " " + result.patient_lastname);
+                    document.getElementById("patient_find").disabled = false;
                     Swal.fire({
                         icon: 'success',
-                        title: 'พบข้อมูล HN: '+ id,
+                        title: 'พบข้อมูล HN: ' + id,
                         text: result.patient_firstname + " " + result.patient_lastname,
                         showConfirmButton: false,
                         timer: 1500
                     })
-                }else{
+                } else {
                     $("#hn").val("");
                     $("#cid").val("");
                     $("#pname").val("");
                     Swal.fire({
                         icon: 'error',
-                        title: 'ไม่พบ HN: '+id,
+                        title: 'ไม่พบ HN: ' + id,
                         text: 'กรุณาตรวจสอบใหม่อีกครั้ง',
                         showConfirmButton: false,
                         timer: 1500
                     })
                 }
+            }
+        });
+    });
+
+    $('#patient_find').click(function () {
+        var id = document.getElementById("hn").value;
+        $.ajax({
+            url: "/api/history/" + id,
+            dataType: 'json',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var row =
+                        $(
+                            '<tbody><tr><td>' + data[i].visit_begin_visit_time + '</td><td>'
+                            + data[i].visit_service_type_description +'</td><td>'
+                            + data[i].emergency_status_description + '</td><td>'
+                            + data[i].description + '</td>'
+                            +'<td><button class="btn btn-success btn-sm">เลือก</button></td></tr></tbody>');
+                    $('#emsHistory').append(row);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error: ' + textStatus + ' - ' + errorThrown);
             }
         });
     });
@@ -205,9 +267,9 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url:"{{ route('er.record_ems') }}",
+                    url: "{{ route('er.record_ems') }}",
                     data: $('#emsRecord').serialize(),
-                    success:function(data){
+                    success: function (data) {
                         Swal.fire({
                             icon: 'success',
                             title: 'บันทึกรายการ EMS สำเร็จ',
@@ -215,7 +277,7 @@
                             timer: 2800
                         })
                         window.setTimeout(function () {
-                                location.replace('/er/ems/')
+                            location.replace('/er/ems/')
                         }, 3000);
                     }
                 });

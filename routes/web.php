@@ -54,6 +54,7 @@ Route::group(['prefix' => 'er'], function () {
 	Route::get('/ems','erController@ems')->name('er.ems');
 	Route::get('/create_ems','erController@emsCreate')->name('er.ems_create');
 	Route::get('/record_ems','erController@record_ems')->name('er.record_ems');
+	Route::get('/update_ems','erController@update_ems')->name('er.update_ems');
 	Route::get('/ems/{id}','erController@show_ems')->name('er.ems_show');
 
 

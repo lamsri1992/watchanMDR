@@ -52,6 +52,31 @@ class erController extends Controller
         );
     }
 
+    function update_ems(Request $request)
+    {
+        $id = $request->get('ems_id');
+        $update = date("Y-m-d H:i:s");
+        DB::connection('mysql')->table('ems_list')->where('ems_id', $id)->update(
+            [
+                'ems_date' => $request->get('date'),
+                'ems_time_in' => $request->get('time_in'),
+                'ems_time_find' => $request->get('time_find'),
+                'ems_no' => $request->get('no'),
+                'ems_symptom' => $request->get('symptom'),
+                'ems_level' => $request->get('level'),
+                'ems_type' => $request->get('type'),
+                'ems_transpot' => $request->get('transpot'),
+                'ems_perm' => $request->get('perm'),
+                'ems_primcare' => $request->get('primcare'),
+                'ems_diag' => $request->get('diag'),
+                'ems_disposition' => $request->get('disposition'),
+                'ems_kpi' => $request->get('kpi'),
+                'ems_create' => Auth::user()->id,
+                'update_at' => $update
+            ]
+        );
+    }
+
     public function show_ems($id)
     {
         $parm_id = base64_decode($id);

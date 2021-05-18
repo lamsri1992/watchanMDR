@@ -38,6 +38,7 @@
                             <div class="form-group col-md-2">
                                 <label for="">HN <span class="text-danger">*</span></label>
                                 <input id="hn" name="hn" type="text" class="form-control text-danger" value="{{ $data->ems_hn }}" readonly>
+                                <input name="ems_id" type="hidden" class="form-control text-danger" value="{{ $data->ems_id }}">
                             </div>
                             <div class="form-group col-md-5">
                                 <label for=""><i class="far fa-address-card"></i> CID</label>
@@ -188,15 +189,15 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    // url: "{{ route('er.record_ems') }}",
+                    url: "{{ route('er.update_ems') }}",
                     data: $('#emsEdit').serialize(),
                     success: function (data) {
                         Swal.fire({
                             icon: 'success',
                             title: 'แก้ไขข้อมูล EMS สำเร็จ',
                             showConfirmButton: false,
-                            timer: 2800
-                        })
+                            timer: 2500
+                        }),
                         window.setTimeout(function () {
                             location.reload()
                         }, 3000);

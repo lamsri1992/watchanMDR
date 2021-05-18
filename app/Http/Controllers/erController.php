@@ -52,4 +52,20 @@ class erController extends Controller
         );
     }
 
+    public function show_ems($id)
+    {
+        $parm_id = base64_decode($id);
+        $data = DB::connection('mysql')->table('ems_list')
+                ->where('ems_id', $parm_id)
+                ->first();
+
+        $lv = DB::connection('mysql')->table('ems_level_list')->get();
+        $tp = DB::connection('mysql')->table('ems_type_list')->get();
+        $tl = DB::connection('mysql')->table('ems_transpot_list')->get();
+        $pl = DB::connection('mysql')->table('ems_perm_list')->get();
+        $ds = DB::connection('mysql')->table('ems_disposition_list')->get();
+
+        return view('er.ems_show', ['data'=>$data,'lv'=>$lv,'tp'=>$tp,'tl'=>$tl,'pl'=>$pl,'ds'=>$ds]);
+    }
+
 }

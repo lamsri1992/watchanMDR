@@ -54,7 +54,7 @@
                                     <td class="text-center">{{ DateThai($ls->ems_date) }}</td>
                                     <td class="text-center">{{ $ls->ems_no }}</td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-info btn-sm">
+                                        <a href="{{ route('er.ems_show',base64_encode($ls->ems_id)) }}" class="btn btn-info btn-sm">
                                             <i class="fa fa-search"></i> รายละเอียด
                                         </a>
                                     </td>

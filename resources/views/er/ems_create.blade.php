@@ -83,7 +83,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for=""><i class="fas fa-info-circle"></i> อาการที่สำคัญ</label>
-                                <input type="text" name="symptom" class="form-control" placeholder="" required>
+                                <input type="text" id="symptom" name="symptom" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">ระดับความรุนแรง</label>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="">การวินิจฉัย</label>
-                                <input type="text" name="diag" class="form-control" placeholder="" required>
+                                <input type="text" id="diag" name="diag" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">Disposition</label>
@@ -172,7 +172,7 @@
                             <th>TRANSPOT</th>
                             <th>LEVEL</th>
                             <th>STATUS</th>
-                            <th><i class="fa fa-bars"></i></th>
+                            <th class="text-center"><i class="fa fa-bars"></i></th>
                         </tr>
                     </thead>
                 </table>
@@ -184,6 +184,15 @@
 @endsection
 @section('script')
 <script type="text/javascript">
+    $(function () {
+        $.datetimepicker.setLocale('th');
+        $(".jsDate").datetimepicker({
+            format: 'Y-m-d',
+            timepicker: false,
+            lang: 'th',
+        });
+    });
+
     document.onkeydown = fkey;
 
     function fkey(e) {
@@ -234,11 +243,13 @@
                 for (var i = 0; i < data.length; i++) {
                     var row =
                         $(
-                            '<tbody><tr><td>' + data[i].visit_begin_visit_time + '</td><td>'
-                            + data[i].visit_service_type_description +'</td><td>'
-                            + data[i].emergency_status_description + '</td><td>'
-                            + data[i].description + '</td>'
-                            +'<td><button class="btn btn-success btn-sm">เลือก</button></td></tr></tbody>');
+                            '<tbody><tr><td>' + data[i].visit_begin_visit_time + '</td>' +
+                            '<td>' + data[i].visit_service_type_description + '</td>' +
+                            '<td>' + data[i].emergency_status_description + '</td>' +
+                            '<td>' + data[i].description + '</td>' +
+                            '<td class="text-center"><button class="btn btn-success btn-sm" onclick="fillData(this)"' +
+                            'data-id="' + data[i].t_visit_id + '">เลือก</button></td></tr></tbody>'
+                        );
                     $('#emsHistory').append(row);
                 }
             },
@@ -248,14 +259,18 @@
         });
     });
 
-    $(function () {
-        $.datetimepicker.setLocale('th');
-        $(".jsDate").datetimepicker({
-            format: 'Y-m-d',
-            timepicker: false,
-            lang: 'th',
+    function fillData(elem) {
+        var id = $(elem).data("id");
+        $.ajax({
+            url: "/api/visit/" + id,
+            success: function (result) {
+                $("#symptom").val(result.visit_primary_symptom_main_symptom);
+                $("#diag").val(result.visit_dx);
+                $('#modalHistory').modal('hide');
+            }
         });
-    });
+    }
+
 
     $('#emsRecord').on('submit', function () {
         event.preventDefault();

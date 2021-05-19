@@ -111,9 +111,15 @@
                         id="navbar-er">
                         <ul class="nav nav-sm flex-column">
                             <li
-                                class="nav-item {{ (request()->is('ems')) ? 'active' : '' }} {{ (request()->is('er/*')) ? 'active' : '' }}">
+                                class="nav-item {{ (request()->is('ems')) ? 'active' : '' }} {{ (request()->is('er/ems*')) ? 'active' : '' }}">
                                 <a class="nav-link" href="/er/ems">
                                     รายงานข้อมูล EMS
+                                </a>
+                            </li>
+                            <li
+                                class="nav-item {{ (request()->is('refer')) ? 'active' : '' }} {{ (request()->is('er/refer*')) ? 'active' : '' }}">
+                                <a class="nav-link" href="/er/refer">
+                                    รายงานข้อมูล REFER
                                 </a>
                             </li>
                         </ul>

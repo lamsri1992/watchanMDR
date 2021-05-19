@@ -52,6 +52,8 @@ Route::group(['prefix' => 'foodOrder'], function () {
 
 Route::group(['prefix' => 'er'], function () {
 	Route::get('/ems','erController@ems')->name('er.ems');
+	Route::get('/refer','erController@refer')->name('er.refer');
+	Route::get('/refer_list','erController@refer_list')->name('er.refer_list');
 	Route::get('/create_ems','erController@emsCreate')->name('er.ems_create');
 	Route::get('/record_ems','erController@record_ems')->name('er.record_ems');
 	Route::get('/update_ems','erController@update_ems')->name('er.update_ems');

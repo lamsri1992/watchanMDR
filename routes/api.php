@@ -25,3 +25,4 @@ Route::apiResource('ipdadmit', 'api\DashboardApiAdmit');
 Route::apiResource('patient', 'api\patientList');
 Route::apiResource('history', 'api\patientHistory');
 Route::apiResource('visit', 'api\patientVisit');
+Route::apiResource('refer', 'api\patientRefer');

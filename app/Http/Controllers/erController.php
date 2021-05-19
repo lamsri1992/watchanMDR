@@ -93,4 +93,17 @@ class erController extends Controller
         return view('er.ems_show', ['data'=>$data,'lv'=>$lv,'tp'=>$tp,'tl'=>$tl,'pl'=>$pl,'ds'=>$ds]);
     }
 
+    public function refer()
+    {
+        // $list = DB::connection('mysql')->table('ems_list')
+        //         ->get();
+        // return view('er.ems', ['list'=>$list]);
+        return view('er.refer');
+    }
+
+    public function refer_list(Request $request)
+    {
+        return view('er.refer_list', ['year'=>$request->get('year')]);
+    }
+
 }

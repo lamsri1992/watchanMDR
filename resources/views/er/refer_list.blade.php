@@ -103,7 +103,12 @@
 
         $('#referList tbody').on('click', 'button', function () {
             var formData = table.row( $(this).parents('tr') ).data();
-            console.log(formData);
+            // console.log(formData);
+            Swal.fire({
+                icon: 'success',
+                title: 'SELECT DATA',
+                text: formData['visit_refer_in_out_number']+" :: "+formData['patient_firstname']+" "+formData['patient_lastname'],
+            })
         });
     });
 

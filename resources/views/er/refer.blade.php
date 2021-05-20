@@ -43,6 +43,7 @@
                                     <th class="text-center"><i class="far fa-address-card"></i> HN</th>
                                     <th class=""><i class="fas fa-user-injured"></i> ผู้ป่วย</th>
                                     <th class="text-center"><i class="fa fa-hospital"></i> รพ.ปลายทาง</th>
+                                    <th class="text-center">สถานะ</th>
                                     <th class="text-center"><i class="fa fa-cog"></i></th>
                                 </tr>
                             </thead>
@@ -57,6 +58,17 @@
                                     <td class="text-center">{{ $ref->refer_hn }}</td>
                                     <td>{{ $ref->refer_patient }}</td>
                                     <td class="text-center">{{ $ref->refer_hname }}</td>
+                                    <td class="text-center">
+                                        @if (!isset($ref->refer_diag_back))
+                                            <span class="badge badge-danger">
+                                                <i class="fa fa-times-circle"></i> Incomplete
+                                            </span>
+                                        @else
+                                            <span class="badge badge-success">
+                                                <i class="fa fa-check-circle"></i> Complete
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ route('er.refer_show',base64_encode($ref->refer_id)) }}" class="btn btn-info btn-sm">
                                             <i class="fa fa-search"></i> รายละเอียด

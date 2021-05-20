@@ -32,16 +32,17 @@
                                 <h2>รายงานข้อมูล REFER : ปี {{ $year }}</h2>
                             </div>
                         </div>
-                        <table id="referList" class="display nowrap table" style="width:100%">
+                        <table id="referList" class="display nowrap table table-condensed" style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
                                     <th class=""><i class="fa fa-table"></i></th>
                                     <th class="">REFER_NO</th>
                                     <th class="">HN</th>
                                     <th class=""><i class="fas fa-user-injured"></i> ผู้ป่วย</th>
-                                    <th class=""><i class="far fa-calendar-check"></i> วันที่บันทึก</th>
-                                    <th class="">SERVICEPOINT</th>
+                                    <th class=""><i class="far fa-calendar-check"></i> วันที่</th>
+                                    <th class=""><i class="far fa-hospital"></i> รพ.ปลายทาง</th>
                                     <th class="">DIAG</th>
+                                    <th class="">หมายเหตุ</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -65,9 +66,9 @@
             },
             scrollX: true,
             scrollCollapse: true,
-            // fixedColumns:   {
-            //     leftColumns: 4,
-            // },
+            fixedColumns:   {
+                leftColumns: 4,
+            },
             columns: [
                 { 'targets': -1, 'data': null, className: "text-center",
                     'defaultContent': '<button class="btn btn-sm btn-success"><i class="fa fa-clipboard-check"></i> เลือก</button>'
@@ -79,9 +80,14 @@
                     return row.patient_firstname + ' ' + row.patient_lastname
                 },
                 },
-                { 'data': 'record_date_time'},
-                { 'data': 'service_point_description'},
+                { 'data': 'visit_begin_visit_time'},
+                { 'data': 'visit_office_name1',
+                    render: function (data, type, row, meta) {
+                    return  '<span class="badge badge-warning">' + row.visit_refer_in_out_refer_hospital + '</span> ' + row.visit_office_name1
+                },
+                },
                 { 'data': 'visit_refer_in_out_summary_diagnosis'},
+                { 'data': 'refer_cause_description'},
             ],
             order: [[1, 'desc']],
             lengthMenu: [
@@ -97,8 +103,8 @@
                 },
                 sInfo: "<small>ทั้งหมด _TOTAL_ รายการ</small>",
                 sLengthMenu: "<small>แสดง _MENU_ รายการ</small>",
-                sSearch: "<i class='fa fa-search'></i> ค้นหา : ",
-            }
+                sSearch: "<i class='fa fa-search'></i> ค้นหา Keywords : ",
+            },
         });
 
         $('#referList tbody').on('click', 'button', function () {

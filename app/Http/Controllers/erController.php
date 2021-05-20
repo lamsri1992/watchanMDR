@@ -95,10 +95,9 @@ class erController extends Controller
 
     public function refer()
     {
-        // $list = DB::connection('mysql')->table('ems_list')
-        //         ->get();
-        // return view('er.ems', ['list'=>$list]);
-        return view('er.refer');
+        $list = DB::connection('mysql')->table('refer_list')
+                ->get();
+        return view('er.refer', ['list'=>$list]);
     }
 
     public function refer_list(Request $request)
@@ -106,6 +105,30 @@ class erController extends Controller
          $emplist = DB::connection('mysql')->table('employee')
                     ->get();
         return view('er.refer_list', ['year'=>$request->get('year'),'emplist'=>$emplist]);
+    }
+
+    function record_refer(Request $request)
+    {
+        $create = date("Y-m-d H:i:s");
+        $arr_select = array();
+        foreach($request->get('emp') as $list){
+            $arr_select[] = $list;
+        }
+        $emplist = implode(",", $arr_select);
+        DB::connection('mysql')->table('refer_list')->insert(
+            [
+                'refer_date' => $request->get('date'),
+                'refer_employee' => $emplist,
+                'refer_no' => $request->get('no'),
+                'refer_hn' => $request->get('hn'),
+                'refer_patient' => $request->get('pname'),
+                'refer_diag_go' => $request->get('diag'),
+                'refer_hcode' => $request->get('hcode'),
+                'refer_hname' => $request->get('hname'),
+                'refer_doctor' => $request->get('doctor'),
+                'create_at' => $create
+            ]
+        );
     }
 
 }

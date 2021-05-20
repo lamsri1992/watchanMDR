@@ -56,7 +56,7 @@
 
 <div class="modal fade" id="referModal" tabindex="-1" role="dialog" aria-labelledby="referModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form>
+        <form id="referRecord">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">
@@ -71,38 +71,44 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="">REFER_NO</label>
-                                    <input id="no" name="no" type="text" class="form-control" readonly>
+                                <div class="form-group col-md-3">
+                                    <label for=""><i class="fa fa-notes-medical"></i> REFER_NO</label>
+                                    <input id="no" name="no" type="text" class="form-control text-danger" readonly>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">HN</label>
-                                    <input id="hn" name="hn" type="text" class="form-control" readonly>
+                                <div class="form-group col-md-3">
+                                    <label for=""><i class="fa fa-address-card"></i> HN</label>
+                                    <input id="hn" name="hn" type="text" class="form-control text-danger" readonly>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">ผู้ป่วย</label>
-                                    <input id="pname" name="pname" type="text" class="form-control" readonly>
+                                <div class="form-group col-md-6">
+                                    <label for=""><i class="fa fa-user-injured"></i> ผู้ป่วย</label>
+                                    <input id="pname" name="pname" type="text" class="form-control text-primary" readonly>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="">DIAG</label>
-                                    <textarea id="diag" name="diag" class="form-control" rows="4" readonly></textarea>
+                                    <label for=""><i class="fa fa-stethoscope"></i> DIAG</label>
+                                    <textarea id="diag" name="diag" class="form-control text-default" rows="4" readonly></textarea>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="">HCODE</label>
-                                    <input id="hcode" name="hcode" type="text" class="form-control" readonly>
+                                    <label for=""><i class="fa fa-hospital-symbol"></i> HCODE</label>
+                                    <input id="hcode" name="hcode" type="text" class="form-control text-primary" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="">โรงพยาบาลปลายทาง</label>
-                                    <input id="hname" name="hname" type="text" class="form-control" readonly>
+                                    <label for=""><i class="fa fa-hospital"></i> โรงพยาบาลปลายทาง</label>
+                                    <input id="hname" name="hname" type="text" class="form-control text-primary" readonly>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="">เจ้าหน้าที่</label>
+                                    <label for=""><i class="far fa-calendar-alt"></i> วันที่ REFER</label>
+                                    <input id="" name="date" type="text" class="form-control jsDate" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for=""><i class="fa fa-users"></i> เจ้าหน้าที่</label>
                                     <select id="emp" name="emp[]" class="form-control" multiple="multiple" style="width:100%;" required>
                                         @foreach ($emplist as $emps)
                                         <option value="{{ $emps->id }}">{{ $emps->emp_name }}</option>
@@ -111,9 +117,10 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="">แพทย์ผู้สั่ง REFER</label>
+                                <div class="form-group col-md-12">
+                                    <label for=""><i class="fa fa-user-md"></i> แพทย์ผู้สั่ง REFER</label>
                                     <select class="form-control" name="doctor" required>
+                                        <option value="">เลือกแพทย์</option>
                                         <option value="ประจินต์ เหล่าเที่ยง">ประจินต์ เหล่าเที่ยง</option>
                                         <option value="นัฐยา กิติกูล">นัฐยา กิติกูล</option>
                                         <option value="ชาติชาย เชวงชุติรัตน์">ชาติชาย เชวงชุติรัตน์</option>
@@ -203,8 +210,49 @@
             text: params.term
         }
     },
-    placeholder: "ระบุเจ้าหน้าที่ REFER",
-});
+        placeholder: "ระบุเจ้าหน้าที่ REFER",
+    });
+
+    $(function() {
+        $.datetimepicker.setLocale('th');
+        $(".jsDate").datetimepicker({
+            format: 'Y-m-d',
+            timepicker: false,
+            lang: 'th',
+            widgetPositioning: {
+            horizontal: "bottom",
+            vertical: "auto"
+          },
+        });
+    });
+
+    $('#referRecord').on('submit', function () {
+        event.preventDefault();
+        Swal.fire({
+            title: 'บันทึกข้อมูล REFER ?',
+            showCancelButton: true,
+            confirmButtonText: `บันทึก`,
+            cancelButtonText: `ยกเลิก`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ route('er.record_refer') }}",
+                    data: $('#referRecord').serialize(),
+                    success: function (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'บันทึกรายการ REFER สำเร็จ',
+                            showConfirmButton: false,
+                            timer: 2800
+                        })
+                        window.setTimeout(function () {
+                            location.replace('/er/refer/')
+                        }, 3000);
+                    }
+                });
+            }
+        })
+    });
 
 </script>
 @endsection

@@ -34,7 +34,38 @@
                                 </a>
                             </div>
                         </div>
-
+                        <table id="referList" class="display nowrap table responsive" width="100%">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center"><i class="far fa-clipboard"></i> REFER_NO</th>
+                                    <th class="text-center"><i class="far fa-calendar-alt"></i> วันที่ REFER</th>
+                                    <th class="text-center"><i class="far fa-address-card"></i> HN</th>
+                                    <th class=""><i class="fas fa-user-injured"></i> ผู้ป่วย</th>
+                                    <th class="text-center"><i class="fa fa-hospital"></i> รพ.ปลายทาง</th>
+                                    <th class="text-center"><i class="fa fa-cog"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($list as $ref)
+                                <tr>
+                                    <th class="text-center">
+                                        REF23736{{ str_pad($ref->refer_id, 4, '0', STR_PAD_LEFT) }}
+                                    </th>
+                                    <td class="text-center">{{ $ref->refer_no }}</td>
+                                    <td class="text-center">{{ DateThai($ref->refer_date) }}</td>
+                                    <td class="text-center">{{ $ref->refer_hn }}</td>
+                                    <td>{{ $ref->refer_patient }}</td>
+                                    <td class="text-center">{{ $ref->refer_hname }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('er.refer_show',base64_encode($ref->refer_id)) }}" class="btn btn-info btn-sm">
+                                            <i class="fa fa-search"></i> รายละเอียด
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

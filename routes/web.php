@@ -58,8 +58,8 @@ Route::group(['prefix' => 'er'], function () {
 	Route::get('/record_ems','erController@record_ems')->name('er.record_ems');
 	Route::get('/update_ems','erController@update_ems')->name('er.update_ems');
 	Route::get('/ems/{id}','erController@show_ems')->name('er.ems_show');
-
-
+	Route::get('/record_refer','erController@record_refer')->name('er.record_refer');
+	Route::get('/refer/{id}','erController@show_refer')->name('er.refer_show');
 });
 
 Route::group(['prefix' => 'search'], function () {

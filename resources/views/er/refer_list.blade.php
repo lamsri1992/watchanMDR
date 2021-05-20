@@ -40,8 +40,8 @@
                                     <th class="">HN</th>
                                     <th class=""><i class="fas fa-user-injured"></i> ผู้ป่วย</th>
                                     <th class=""><i class="far fa-calendar-check"></i> วันที่บันทึก</th>
+                                    <th class="">SERVICEPOINT</th>
                                     <th class="">DIAG</th>
-                                    <th class="">TREATMENT</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -65,23 +65,23 @@
             },
             scrollX: true,
             scrollCollapse: true,
-            fixedColumns:   {
-                leftColumns: 1,
-            },
+            // fixedColumns:   {
+            //     leftColumns: 4,
+            // },
             columns: [
                 { 'targets': -1, 'data': null, className: "text-center",
                     'defaultContent': '<button class="btn btn-sm btn-success"><i class="fa fa-clipboard-check"></i> เลือก</button>'
                 },
                 { 'data': 'visit_refer_in_out_number', className: "text-center" },
-                { 'data': 'visit_refer_in_out_hn', className: "text-center" },
+                { 'data': 'visit_hn', className: "text-center" },
                 { 'data': 'patient_firstname',
                     render: function (data, type, row, meta) {
                     return row.patient_firstname + ' ' + row.patient_lastname
                 },
                 },
                 { 'data': 'record_date_time'},
+                { 'data': 'service_point_description'},
                 { 'data': 'visit_refer_in_out_summary_diagnosis'},
-                { 'data': 'visit_refer_in_out_summary_treatment'},
             ],
             order: [[1, 'desc']],
             lengthMenu: [
@@ -103,11 +103,10 @@
 
         $('#referList tbody').on('click', 'button', function () {
             var formData = table.row( $(this).parents('tr') ).data();
-            // console.log(formData);
             Swal.fire({
                 icon: 'success',
-                title: 'SELECT DATA',
-                text: formData['visit_refer_in_out_number']+" :: "+formData['patient_firstname']+" "+formData['patient_lastname'],
+                title: formData['visit_refer_in_out_number'],
+                text: formData['patient_firstname'] + " " + formData['patient_lastname'],
             })
         });
     });

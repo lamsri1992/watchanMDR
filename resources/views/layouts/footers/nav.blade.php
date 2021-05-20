@@ -7,7 +7,7 @@
     <div class="col-xl-6">
         <ul class="nav nav-footer justify-content-center justify-content-xl-end">
             <li class="nav-item">
-                <a href="#" class="nav-link" target="_blank">WATCHAN MDR V 0.2.0</a>
+                <a href="#" class="nav-link" target="_blank">WATCHAN MIS V 0.2.0</a>
             </li>
             <li class="nav-item">
                 <a href="https://www.laravel.com" class="nav-link" target="_blank"> <i class="fab fa-laravel"></i> LARAVEL</a>

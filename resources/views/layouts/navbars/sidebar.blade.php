@@ -111,7 +111,7 @@
                         id="navbar-er">
                         <ul class="nav nav-sm flex-column">
                             <li
-                                class="nav-item {{ (request()->is('ems')) ? 'active' : '' }} {{ (request()->is('er/ems*')) ? 'active' : '' }}">
+                                class="nav-item {{ (request()->is('ems','er/create_ems')) ? 'active' : '' }} {{ (request()->is('er/ems*')) ? 'active' : '' }}">
                                 <a class="nav-link" href="/er/ems">
                                     รายงานข้อมูล EMS
                                 </a>

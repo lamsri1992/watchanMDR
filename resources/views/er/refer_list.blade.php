@@ -54,6 +54,83 @@
     </div>
 </div>
 
+<div class="modal fade" id="referModal" tabindex="-1" role="dialog" aria-labelledby="referModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <form>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">
+                        บันทึกข้อมูลการ REFER
+                        <small id="vid" class="text-muted"></small>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="">REFER_NO</label>
+                                    <input id="no" name="no" type="text" class="form-control" readonly>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">HN</label>
+                                    <input id="hn" name="hn" type="text" class="form-control" readonly>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">ผู้ป่วย</label>
+                                    <input id="pname" name="pname" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="">DIAG</label>
+                                    <textarea id="diag" name="diag" class="form-control" rows="4" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="">HCODE</label>
+                                    <input id="hcode" name="hcode" type="text" class="form-control" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">โรงพยาบาลปลายทาง</label>
+                                    <input id="hname" name="hname" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="">เจ้าหน้าที่</label>
+                                    <select id="emp" name="emp[]" class="form-control" multiple="multiple" style="width:100%;" required>
+                                        @foreach ($emplist as $emps)
+                                        <option value="{{ $emps->id }}">{{ $emps->emp_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="">แพทย์ผู้สั่ง REFER</label>
+                                    <select class="form-control" name="doctor" required>
+                                        <option value="ประจินต์ เหล่าเที่ยง">ประจินต์ เหล่าเที่ยง</option>
+                                        <option value="นัฐยา กิติกูล">นัฐยา กิติกูล</option>
+                                        <option value="ชาติชาย เชวงชุติรัตน์">ชาติชาย เชวงชุติรัตน์</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> บันทึกข้อมูล</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -65,10 +142,6 @@
                 dataSrc: ""
             },
             scrollX: true,
-            scrollCollapse: true,
-            fixedColumns:   {
-                leftColumns: 4,
-            },
             columns: [
                 { 'targets': -1, 'data': null, className: "text-center",
                     'defaultContent': '<button class="btn btn-sm btn-success"><i class="fa fa-clipboard-check"></i> เลือก</button>'
@@ -109,13 +182,29 @@
 
         $('#referList tbody').on('click', 'button', function () {
             var formData = table.row( $(this).parents('tr') ).data();
-            Swal.fire({
-                icon: 'success',
-                title: formData['visit_refer_in_out_number'],
-                text: formData['patient_firstname'] + " " + formData['patient_lastname'],
-            })
+            $("#referModal").modal("show");
+            $("#vid").text("ref : " + formData['t_visit_id']);
+            document.getElementById("no").value = formData['visit_refer_in_out_number'];
+            document.getElementById("hn").value = formData['visit_hn'];
+            document.getElementById("pname").value = formData['patient_firstname'] + " " + formData['patient_lastname'];
+            document.getElementById("diag").value = formData['visit_refer_in_out_summary_diagnosis'];
+            document.getElementById("hcode").value = formData['visit_refer_in_out_refer_hospital'];
+            document.getElementById("hname").value = formData['visit_office_name1'];
         });
     });
+
+    $('#emp').select2({
+    createTag: function(params) {
+        if (params.term.indexOf('@') === -1) {
+            return null;
+        }
+        return {
+            id: params.term,
+            text: params.term
+        }
+    },
+    placeholder: "ระบุเจ้าหน้าที่ REFER",
+});
 
 </script>
 @endsection

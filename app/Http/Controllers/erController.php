@@ -103,7 +103,9 @@ class erController extends Controller
 
     public function refer_list(Request $request)
     {
-        return view('er.refer_list', ['year'=>$request->get('year')]);
+         $emplist = DB::connection('mysql')->table('employee')
+                    ->get();
+        return view('er.refer_list', ['year'=>$request->get('year'),'emplist'=>$emplist]);
     }
 
 }

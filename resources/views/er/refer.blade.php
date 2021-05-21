@@ -60,9 +60,9 @@
                                     <td class="text-center">{{ $ref->refer_hname }}</td>
                                     <td class="text-center">
                                         @if (!isset($ref->refer_diag_back))
-                                            <span class="badge badge-danger">
+                                            <a href="#" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="รายการไม่สมบูรณ์">
                                                 <i class="fa fa-times-circle"></i> Incomplete
-                                            </span>
+                                            </a>
                                         @else
                                             <span class="badge badge-success">
                                                 <i class="fa fa-check-circle"></i> Complete
@@ -141,6 +141,9 @@
             }
         });
     });
-
+    
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>
 @endsection

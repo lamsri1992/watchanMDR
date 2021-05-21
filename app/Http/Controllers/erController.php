@@ -131,4 +131,17 @@ class erController extends Controller
         );
     }
 
+    public function show_refer($id)
+    {
+        $parm_id = base64_decode($id);
+        $data = DB::connection('mysql')->table('refer_list')
+                ->where('refer_id', $parm_id)
+                ->first();
+        $list_id = $data->refer_employee;
+        $emplist = DB::table('employee')
+                ->whereRaw('id in ('.$list_id.')')
+                ->get();
+        return view('er.refer_show', ['data'=>$data,'emplist'=>$emplist]);
+    }
+
 }

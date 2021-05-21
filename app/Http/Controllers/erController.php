@@ -144,4 +144,18 @@ class erController extends Controller
         return view('er.refer_show', ['data'=>$data,'emplist'=>$emplist]);
     }
 
+    function update_refer(Request $request)
+    {
+        $id = $request->get('id');
+        DB::connection('mysql')->table('refer_list')->where('refer_id', $id)->update(
+            [
+                'refer_alcohol' => $request->get('alcohol'),
+                'refer_diag_back' => $request->get('diag_back'),
+                'refer_time_go' => $request->get('time_go'),
+                'refer_time_back' => $request->get('time_back')
+            ]
+        );
+        return back()->with("update","บันทึกข้อมูล REF23736".str_pad($id, 4, '0', STR_PAD_LEFT)." สำเร็จ");
+    }
+
 }

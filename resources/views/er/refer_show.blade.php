@@ -33,44 +33,76 @@
                             </div>
                         </div>
                     </div>
-                       <table class="table table-condensed table-sm table-hover">
-                           <tr>
-                               <th><i class="far fa-calendar"></i> วันที่ REFER</th>
-                               <td>{{ DateThai($data->refer_date) }}</td>
-                               <th><i class="fas fa-clipboard"></i> REFER_NO</th>
-                               <td>{{ DateThai($data->refer_no) }}</td>
-                           </tr>
-                           <tr>
-                               <th><i class="far fa-address-card"></i> HN</th>
-                               <td>{{ $data->refer_hn }}</td>
-                               <th><i class="fas fa-user-injured"></i> ผู้ป่วย</th>
-                               <td>{{ $data->refer_patient }}</td>
-                            </tr>
-                            <tr>
-                                <th><i class="fa fa-stethoscope"></i> DIAG</th>
-                                <td colspan="3">{{ $data->refer_diag_go }}</td>
-                             </tr>
-                            <tr>
-                                <th><i class="fas fa-hospital-symbol"></i> HCODE</th>
-                                <td>{{ $data->refer_hcode }}</td>
-                                <th><i class="far fa-hospital"></i> รพ. ปลายทาง</th>
-                                <td>{{ $data->refer_hname }}</td>
-                            </tr>
-                             <tr>
-                                <th><i class="fas fa-user-md"></i> แพทย์สั่ง REFER</th>
-                                <td colspan="3">{{ $data->refer_doctor }}</td>
-                             </tr>
-                             <tr>
-                                <th><i class="fas fa-users"></i> เจ้าหน้าที่ REFER</th>
-                                <td colspan="3">
-                                    @foreach ($emplist as $emp)
-                                    <li>{{ $emp->emp_name }} : {{ $emp->emp_position }}</li>
-                                    @endforeach
-                                </td>
-                             </tr>
-                       </table>
+                    <table class="table table-condensed table-sm">
+                        <tr>
+                            <th><i class="far fa-calendar"></i> วันที่ REFER</th>
+                            <td>{{ DateThai($data->refer_date) }}</td>
+                            <th><i class="fas fa-clipboard"></i> REFER_NO</th>
+                            <td>{{ $data->refer_no }}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="far fa-address-card"></i> HN</th>
+                            <td>{{ $data->refer_hn }}</td>
+                            <th><i class="fas fa-user-injured"></i> ผู้ป่วย</th>
+                            <td>{{ $data->refer_patient }}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fa fa-stethoscope"></i> DIAG</th>
+                            <td colspan="3">{{ $data->refer_diag_go }}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-hospital-symbol"></i> HCODE</th>
+                            <td>{{ $data->refer_hcode }}</td>
+                            <th><i class="far fa-hospital"></i> รพ. ปลายทาง</th>
+                            <td>{{ $data->refer_hname }}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-user-md"></i> แพทย์สั่ง REFER</th>
+                            <td colspan="3">{{ $data->refer_doctor }}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-users"></i> เจ้าหน้าที่ REFER</th>
+                            <td colspan="3">
+                                @foreach ($emplist as $emp)
+                                <li>{{ $emp->emp_name }} : {{ $emp->emp_position }}</li>
+                                @endforeach
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <h2><i class="far fa-edit"></i> บันทึกข้อมูลเพิ่มเติม</h2>
+                    </div>
                     <form id="referUpdate">
-                        
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for=""><i class="fa fa-wine-bottle"></i> ระดับแอลกอฮอล์ (mg%)</label>
+                                <input name="alcohol" type="text" class="form-control" value="{{ $data->refer_alcohol }}" required>
+                                <input name="id" type="hidden" class="form-control" value="{{ $data->refer_id }}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for=""><i class="fa fa-comment-medical"></i> DIAG รพ.ปลายทาง</label>
+                                <input name="diag_back" type="text" class="form-control" value="{{ $data->refer_diag_back }}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for=""><i class="fa fa-clock"></i> เวลาที่ออก</label>
+                                <input name="time_go" type="time" class="form-control" value="{{ $data->refer_time_go }}" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for=""><i class="fa fa-clock"></i> เวลากลับถึง</label>
+                                <input name="time_back" type="time" class="form-control" value="{{ $data->refer_time_back }}" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 text-right">
+                                <button class="btn btn-success">
+                                    <i class="fa fa-save"></i> บันทึกข้อมูล
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -93,7 +125,7 @@
     $('#referUpdate').on('submit', function () {
         event.preventDefault();
         Swal.fire({
-            title: 'บันทึกข้อมูล REFER ?',
+            title: 'บันทึกข้อมูล REFER23736{{ str_pad($data->refer_id, 4, "0", STR_PAD_LEFT) }}?',
             showCancelButton: true,
             confirmButtonText: `บันทึก`,
             cancelButtonText: `ยกเลิก`,

@@ -61,6 +61,7 @@ Route::group(['prefix' => 'er'], function () {
 	Route::get('/record_refer','erController@record_refer')->name('er.record_refer');
 	Route::get('/refer/{id}','erController@show_refer')->name('er.refer_show');
 	Route::get('/update_refer','erController@update_refer')->name('er.update_refer');
+    Route::get('/report','erController@refer_report')->name('er.refer_report');
 });
 
 Route::group(['prefix' => 'search'], function () {

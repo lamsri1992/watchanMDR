@@ -111,7 +111,7 @@
                                     <label for=""><i class="fa fa-users"></i> เจ้าหน้าที่</label>
                                     <select id="emp" name="emp[]" class="form-control" multiple="multiple" style="width:100%;" required>
                                         @foreach ($emplist as $emps)
-                                        <option value="{{ $emps->id }}">{{ $emps->emp_name }}</option>
+                                        <option value="{{ $emps->emp_name }}">{{ $emps->emp_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

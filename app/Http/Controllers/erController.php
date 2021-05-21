@@ -137,11 +137,11 @@ class erController extends Controller
         $data = DB::connection('mysql')->table('refer_list')
                 ->where('refer_id', $parm_id)
                 ->first();
-        $list_id = $data->refer_employee;
-        $emplist = DB::table('employee')
-                ->whereRaw('id in ('.$list_id.')')
-                ->get();
-        return view('er.refer_show', ['data'=>$data,'emplist'=>$emplist]);
+        // $list_id = $data->refer_employee;
+        // $emplist = DB::table('employee')
+        //         ->whereRaw('id in ('.$list_id.')')
+        //         ->get();
+        return view('er.refer_show', ['data'=>$data]);
     }
 
     function update_refer(Request $request)
@@ -156,6 +156,17 @@ class erController extends Controller
             ]
         );
         return back()->with("update","บันทึกข้อมูล REF23736".str_pad($id, 4, '0', STR_PAD_LEFT)." สำเร็จ");
+    }
+
+    function refer_report (Request $request)
+    {
+        $d_start = $request->get('date_start');
+        $d_end = $request->get('date_end');
+        $report = DB::connection('mysql')->table('refer_list')
+                ->whereRaw("refer_date >= date('$d_start')")
+                ->whereRaw("refer_date <= date('$d_end')")
+                ->get();
+        return view('er.refer_report', ['report'=>$report,'d_start'=>$d_start,'d_end'=>$d_end]);
     }
 
 }

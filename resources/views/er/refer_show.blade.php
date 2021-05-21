@@ -63,8 +63,9 @@
                         <tr>
                             <th><i class="fas fa-users"></i> เจ้าหน้าที่ REFER</th>
                             <td colspan="3">
-                                @foreach ($emplist as $emp)
-                                <li>{{ $emp->emp_name }} : {{ $emp->emp_position }}</li>
+                                @php $arr = explode(",", $data->refer_employee); @endphp
+                                @foreach ($arr as $emps)
+                                    <li>{{ $emps }}</li>
                                 @endforeach
                             </td>
                         </tr>

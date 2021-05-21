@@ -29,6 +29,9 @@
                                 <h2>รายงานข้อมูล REFER</h2>
                             </div>
                             <div class="col-6 text-right">
+                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#report">
+                                    <i class="fa fa-print"></i> Report ข้อมูล
+                                </a>
                                 <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#refer">
                                     <i class="fa fa-plus-circle"></i> บันทึกข้อมูล REFER
                                 </a>
@@ -82,6 +85,37 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ route('er.refer_report') }}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportLabel"><i class="far fa-calendar-check"></i> เลือกช่วงวันที่ที่ต้องการ</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <small class="text-danger">* ระบบจะดึงข้อมูลที่ Complete เท่านั้น *</small>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="date_start" class="form-control jsDate" placeholder="เลือกวันที่" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="date_end" class="form-control jsDate" placeholder="เลือกวันที่" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-search"></i>
+                        ค้นหาข้อมูล
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -145,5 +179,14 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    $(function() {
+        $.datetimepicker.setLocale('th');
+        $(".jsDate").datetimepicker({
+            format: 'Y-m-d',
+            timepicker: false,
+            lang: 'th',
+        });
+    });
 </script>
 @endsection

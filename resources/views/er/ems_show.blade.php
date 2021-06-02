@@ -129,6 +129,14 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
+                                <label for="">สถานที่เกิดเหตุ</label>
+                                <input type="text" name="place" class="form-control" value="{{ $data->ems_place }}" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">RC CODE</label>
+                                <input type="text" name="rccode" class="form-control" value="{{ $data->ems_rccode }}" required>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="">การดูแลเบื้องต้น</label>
                                 <input type="text" name="primcare" class="form-control" value="{{ $data->ems_primcare }}" required>
                             </div>

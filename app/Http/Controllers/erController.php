@@ -43,6 +43,8 @@ class erController extends Controller
                 'ems_transpot' => $request->get('transpot'),
                 'ems_perm' => $request->get('perm'),
                 'ems_primcare' => $request->get('primcare'),
+                'ems_place' => $request->get('place'),
+                'ems_rccode' => $request->get('rccode'),
                 'ems_diag' => $request->get('diag'),
                 'ems_disposition' => $request->get('disposition'),
                 'ems_kpi' => $request->get('kpi'),

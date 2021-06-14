@@ -16,7 +16,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-muted mb-0">จำนวนผู้ป่วยนอก</h5>
-                                    <span class="h2 font-weight-bold mb-0">10 <small class="text-muted">ราย</small></span>
+                                    <span class="h2 font-weight-bold mb-0">- <small class="text-muted">ราย</small></span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -54,7 +54,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-muted mb-0">ผู้ป่วยอุบัติเหตุ/ฉุกเฉิน</h5>
-                                    <span class="h2 font-weight-bold mb-0">0 <small class="text-muted">ราย</small></span>
+                                    <span class="h2 font-weight-bold mb-0">- <small class="text-muted">ราย</small></span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -71,7 +71,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-muted mb-0">จำนวนการส่งต่อ Refer</h5>
-                                    <span class="h2 font-weight-bold mb-0">0 <small class="text-muted">ครั้ง</small></span>
+                                    <span class="h2 font-weight-bold mb-0">- <small class="text-muted">ครั้ง</small></span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">

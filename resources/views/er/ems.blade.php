@@ -36,8 +36,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th class="text-center">ID</th>
-                                    <th class=""><i class="far fa-address-card"></i> HN</th>
-                                    <th class=""><i class="fas fa-user-injured"></i> ผู้ป่วย</th>
+                                    <th class=""> สถานะ</th>
                                     <th class="text-center"><i class="far fa-calendar"></i> วันที่เกิดเหตุ</th>
                                     <th class="text-center"><i class="fa fa-clipboard-list"></i> เลขปฏิบัติการณ์</th>
                                     <th class="text-center"><i class="fa fa-cog"></i></th>
@@ -49,8 +48,7 @@
                                     <th class="text-center">
                                         EMS23736{{ str_pad($ls->ems_id, 4, '0', STR_PAD_LEFT) }}
                                     </th>
-                                    <td class="">{{ $ls->ems_hn }}</td>
-                                    <td class="">{{ $ls->ems_pname }}</td>
+                                    <td class="">{{ $ls->ems_status_name }}</td>
                                     <td class="text-center">{{ DateThai($ls->ems_date) }}</td>
                                     <td class="text-center">{{ $ls->ems_no }}</td>
                                     <td class="text-center">

@@ -11,6 +11,7 @@ class erController extends Controller
     public function ems()
     {
         $list = DB::connection('mysql')->table('ems_list')
+                ->leftJoin('ems_status', 'ems_status.ems_status_id', '=', 'ems_list.ems_status')
                 ->get();
         return view('er.ems', ['list'=>$list]);
     }
@@ -22,7 +23,8 @@ class erController extends Controller
         $tl = DB::connection('mysql')->table('ems_transpot_list')->get();
         $pl = DB::connection('mysql')->table('ems_perm_list')->get();
         $ds = DB::connection('mysql')->table('ems_disposition_list')->get();
-        return view('er.ems_create', ['lv'=>$lv,'tp'=>$tp,'tl'=>$tl,'pl'=>$pl,'ds'=>$ds]);
+        $st = DB::connection('mysql')->table('ems_status')->get();
+        return view('er.ems_create', ['lv'=>$lv,'tp'=>$tp,'tl'=>$tl,'pl'=>$pl,'ds'=>$ds,'st'=>$st]);
     }
 
     function record_ems(Request $request)
@@ -30,6 +32,7 @@ class erController extends Controller
         $create = date("Y-m-d H:i:s");
         DB::connection('mysql')->table('ems_list')->insert(
             [
+                'ems_status' => $request->get('stat'),
                 'ems_hn' => $request->get('hn'),
                 'ems_cid' => $request->get('cid'),
                 'ems_pname' => $request->get('pname'),
@@ -91,8 +94,9 @@ class erController extends Controller
         $tl = DB::connection('mysql')->table('ems_transpot_list')->get();
         $pl = DB::connection('mysql')->table('ems_perm_list')->get();
         $ds = DB::connection('mysql')->table('ems_disposition_list')->get();
+        $st = DB::connection('mysql')->table('ems_status')->get();
 
-        return view('er.ems_show', ['data'=>$data,'lv'=>$lv,'tp'=>$tp,'tl'=>$tl,'pl'=>$pl,'ds'=>$ds]);
+        return view('er.ems_show', ['data'=>$data,'lv'=>$lv,'tp'=>$tp,'tl'=>$tl,'pl'=>$pl,'ds'=>$ds,'st'=>$st]);
     }
 
     public function refer()

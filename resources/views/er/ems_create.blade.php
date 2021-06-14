@@ -36,6 +36,15 @@
                     <form id="emsRecord">
                         <div class="form-row">
                             <div class="form-group col-md-2">
+                                <label for="">สถานะ</label>
+                                <select name="stat" class="custom-select" required>
+                                    <option value="">เลือก</option>
+                                    @foreach($st as $sts)
+                                        <option value="{{ $sts->ems_status_id }}">{{ $sts->ems_status_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
                                 <label for="">HN <span class="text-danger">*</span></label>
                                 <input id="hn" name="hn" type="text" class="form-control" placeholder="ระบุหมายเลข HN">
                             </div>
@@ -52,22 +61,21 @@
                                     <i class="fa fa-notes-medical"></i>
                                 </button>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for=""><i class="far fa-address-card"></i> CID</label>
                                 <input id="cid" name="cid" type="text" class="form-control" placeholder="ค่าอัตโนมัติ"
-                                    readonly required>
+                                    readonly>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for=""><i class="fas fa-user-injured"></i> ชื่อ - สกุล</label>
                                 <input id="pname" name="pname" type="text" class="form-control"
-                                    placeholder="ค่าอัตโนมัติ" readonly required>
+                                    placeholder="ค่าอัตโนมัติ" readonly>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for=""><i class="far fa-calendar"></i> วันที่เกิดเหตุ</label>
-                                <input type="text" name="date" class="form-control jsDate" placeholder="เลือกวันที่"
-                                    required>
+                                <input type="text" name="date" class="form-control jsDate" placeholder="เลือกวันที่" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for=""><i class="far fa-clock"></i> เวลารับแจ้งเหตุ</label>
@@ -79,15 +87,15 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">เลขปฏิบัติการ</label>
-                                <input type="text" name="no" class="form-control" placeholder="" required>
+                                <input type="text" name="no" class="form-control" placeholder="">
                             </div>
                             <div class="form-group col-md-12">
                                 <label for=""><i class="fas fa-info-circle"></i> อาการที่สำคัญ</label>
-                                <input type="text" id="symptom" name="symptom" class="form-control" placeholder="" required>
+                                <input type="text" id="symptom" name="symptom" class="form-control" placeholder="">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">ระดับความรุนแรง</label>
-                                <select name="level" class="custom-select" required>
+                                <select name="level" class="custom-select">
                                     <option value="">เลือก</option>
                                     @foreach($lv as $lvs)
                                         <option value="{{ $lvs->level_id }}">{{ $lvs->level_name }}</option>
@@ -96,7 +104,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">ประเภทผู้ป่วย</label>
-                                <select name="type" class="custom-select" required>
+                                <select name="type" class="custom-select">
                                     <option value="">เลือก</option>
                                     @foreach($tp as $tps)
                                         <option value="{{ $tps->type_id }}">{{ $tps->type_name }}</option>
@@ -105,7 +113,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">การนำส่ง</label>
-                                <select name="transpot" class="custom-select" required>
+                                <select name="transpot" class="custom-select">
                                     <option value="">เลือก</option>
                                     @foreach($tl as $tls)
                                         <option value="{{ $tls->tran_id }}">{{ $tls->tran_name }}</option>
@@ -114,7 +122,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">สิทธิการรักษา</label>
-                                <select name="perm" class="custom-select" required>
+                                <select name="perm" class="custom-select">
                                     <option value="">เลือก</option>
                                     @foreach($pl as $pls)
                                         <option value="{{ $pls->perm_id }}">{{ $pls->perm_name }}</option>
@@ -123,23 +131,23 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="">สถานที่เกิดเหตุ</label>
-                                <input type="text" name="place" class="form-control" placeholder="" required>
+                                <input type="text" name="place" class="form-control" placeholder="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="">RC CODE</label>
-                                <input type="text" name="rccode" class="form-control" placeholder="" required>
+                                <input type="text" name="rccode" class="form-control" placeholder="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="">การดูแลเบื้องต้น</label>
-                                <input type="text" name="primcare" class="form-control" placeholder="" required>
+                                <input type="text" name="primcare" class="form-control" placeholder="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="">การวินิจฉัย</label>
-                                <input type="text" id="diag" name="diag" class="form-control" placeholder="" required>
+                                <input type="text" id="diag" name="diag" class="form-control" placeholder="">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">Disposition</label>
-                                <select name="disposition" class="custom-select" required>
+                                <select name="disposition" class="custom-select">
                                     <option value="">เลือก</option>
                                     @foreach($ds as $dss)
                                         <option value="{{ $dss->dis_id }}">{{ $dss->dis_name }}</option>
@@ -148,7 +156,7 @@
                             </div>
                             <div class="form-group col-md-9">
                                 <label for="">ประเด็นคุณภาพที่สำคัญ</label>
-                                <input type="text" name="kpi" class="form-control" placeholder="" required>
+                                <input type="text" name="kpi" class="form-control" placeholder="">
                             </div>
                         </div>
                         <div class="text-right">

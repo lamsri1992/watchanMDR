@@ -6,7 +6,7 @@
             <div class="header-body text-center mt-7 mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-12 col-md-6">
-                        <h1 class="text-white">{{ __('ยินดีต้อนรับเข้าสู่ระบบบริหารจัดการข้อมูลผู้ป่วย') }}</h1>
+                        <h1 class="text-white">{{ __('ยินดีต้อนรับเข้าสู่ระบบสารสนเทศเพื่อการบริหาร') }}</h1>
                         <h5 class="text-white">{{ __('โรงพยาบาลวัดจันทร์เฉลิมพระเกียรติ ๘๐ พรรษา') }}</h5>
                         <a href="/login" class="btn btn-primary">{{ __('คลิ๊กที่นี่ เพื่อลงชื่อเข้าใช้งานระบบ') }}</a>
                     </div>

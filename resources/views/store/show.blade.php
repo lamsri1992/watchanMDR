@@ -97,7 +97,7 @@
                             $path = "/MDR/".$data->list_vn."/Charts/".$data->list_path;
                         @endphp
                         <div class="container">
-                            <embed src="{{ $path }}#toolbar=0" width="100%" height="800px" />
+                            <iframe style="pointer-events:none;" src="{{ $path }}#toolbar=0&navpanes=0" width="100%" height="800px"></iframe>
                         </div>
                     </div>
                     @endif

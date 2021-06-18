@@ -110,9 +110,9 @@
     @section('script')
     <script type="text/javascript">
     $(document).ready(function () {
-            $("#alert").fadeTo(5000, 500).slideUp(500, function () {
-                $("#alert").slideUp(500);
-            });
+        $("#alert").fadeTo(5000, 500).slideUp(500, function () {
+            $("#alert").slideUp(500);
         });
+    });
     </script>
     @endsection

@@ -12,8 +12,9 @@
                             <div class="mb-0">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item active" aria-current="page"><i
-                                                class="fa fa-users"></i> ระบบจัดการผู้ใช้งาน</li>
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            <i class="fa fa-users"></i> ระบบจัดการผู้ใช้งาน
+                                        </li>
                                     </ol>
                                 </nav>
                             </div>
@@ -21,7 +22,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="container-fluid">
+                    <div class="">
                         @if($message = Session::get('success'))
                         <div id="alert" class="alert alert-success alert-block">
                             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -46,6 +47,7 @@
                                     <th class="">ชื่อผู้ใช้งาน</th>
                                     <th class="">อีเมล์</th>
                                     <th class="">สิทธิ์การใช้งาน</th>
+                                    <th class="">เวชระเบียน</th>
                                     <th class="text-center"><i class="fa fa-bars"></i></th>
                                 </tr>
                             </thead>
@@ -57,6 +59,13 @@
                                         <td class="">{{ $users->username }}</td>
                                         <td class="">{{ $users->email }}</td>
                                         <td class="">{{ $users->permission }}</td>
+                                        <td class="">
+                                            @if ($users->permission_chart == 'Y')
+                                                <i class='fas fa-check-circle text-success'></i> ดูได้
+                                            @else
+                                                <i class='fas fa-times-circle text-danger'></i> ปิดกั้น
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <div class="dropdown">
                                                 <button class="btn btn-info btn-sm dropdown-toggle" type="button"
